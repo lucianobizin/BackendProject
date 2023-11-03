@@ -1,0 +1,37 @@
+<div class="main-container">
+    <div class="submain-container" id="submain-container">
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{this.product.thumbnail.[0]}}" alt="{{this.product.title}}">
+                </div>
+                <div class="product-details">
+                    <h1 class="product-title">{{this.product.title}}</h1>
+                    <p class="product-description">{{this.product.description}}</p>
+                    <p class="product-price">Price: ${{this.product.price}}</p>
+                    <p class="product-stock">Stock: {{this.product.stock}}</p>
+                    <p class="product-code">Product Code: {{this.product.code}}</p>
+                    <p class="product-category">Category: {{this.product.category}}</p>
+                    <p class="product-status">Status: {{this.product.status}}</p>
+                </div>
+            </div>
+        </div>
+        <button class="chat-button" id="chat-button">Chat</button>
+    </div>
+
+    <div class="chat-container" id="chat-container" style="display: none;">
+        <h2 class="title-chat">What are people saying about this course?</h2>
+        <p id="loading-text"> Loading messages...</p>
+        <div id="chat-content" class="chat-content"></div>
+        <div class="input-panel" id="input-panel">
+            <textarea id="chat-box"></textarea>
+            <button id="send-button">Send</button>
+        </div>
+        <button id="close-chat-button" style="display: none;">Close Chat</button>
+    </div>
+</div>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/productChat.js"></script>

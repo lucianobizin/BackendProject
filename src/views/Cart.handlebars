@@ -1,0 +1,17 @@
+<div>
+    <h1>Cart</h1>
+    <div>
+        {{#each cart.products}}
+        <h1>{{this.pid.title}}</h1>
+        <img src="{{this.pid.thumbnail.[0]}}">
+        <p> Description: {{this.pid.description}}</p>
+        <p> Price: {{this.pid.price}}</p>
+        <p> Stock: {{this.pid.stock}}</p>
+        <p> Code: {{this.pid.code}}</p>
+        <p> Category: {{this.pid.category}}</p>
+        <p> Status: {{this.pid.status}}</p>
+        <p> ID: {{this.pid._id}}</p>
+        <p> Quantity: {{this.quantity}}</p>
+        {{/each}}
+    </div>
+</div>

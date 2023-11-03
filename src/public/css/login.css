@@ -1,0 +1,107 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Contenedor del formulario */
+#loginForm {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Campos de entrada de texto */
+input[type="text"],
+input[type="password"] {
+    width: 75%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Botón de inicio de sesión */
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Estilos para los botones de Google y Github */
+.login-provider-text {
+    margin: 0 0 10px;
+    font-weight: bold;
+}
+
+.login-provider-link {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.login-provider-button {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 12px 20px;
+    text-align: center;
+    color: #333;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-provider-button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Botón de Registro */
+.register-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.register-button:hover {
+    background-color: #222;
+}

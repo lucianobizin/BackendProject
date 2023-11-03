@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "dev",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}\\src\\app.js",
+            "env": {
+                "MONGO_URL": "mongodb+srv://lucianobizin:yUmILMbKoZUCIshp@cluster0.g1qxexh.mongodb.net/CoderBackend?retryWrites=true&w=majority",
+                "JWT_COOKIE": "authCookie",
+                "JWT_SECRET": "ultrasecretCOD3",
+                "CORREO_ADMIN": "adminCoder@coder.com",
+                "PASSWORD_ADMIN": "adminCod3r123",
+                "GITHUB_CLIENT_ID": "Iv1.d29951e680b99947",
+                "GITHUB_CLIENT_SECRET": "ac385ea2076f0893c097ef285e316339399ab7a3",
+                "GITHUB_CALLBACK_URL": "http://localhost:8080/api/sessions/githubcallback"
+            },
+            "restart": true,
+            "runtimeExecutable": "nodemon"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "prod",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}\\src\\app.js",
+            "env": {
+                "MONGO_URL": "mongodb+srv://lucianobizin:yUmILMbKoZUCIshp@cluster0.g1qxexh.mongodb.net/CoderBackendProdEnv?retryWrites=true&w=majority",
+                "JWT_COOKIE": "authCookie",
+                "JWT_SECRET": "ultrasecretCOD3",
+                "CORREO_ADMIN": "adminCoder@coder.com",
+                "PASSWORD_ADMIN": "adminCod3r123",
+                "GITHUB_CLIENT_ID": "Iv1.d29951e680b99947",
+                "GITHUB_CLIENT_SECRET": "ac385ea2076f0893c097ef285e316339399ab7a3",
+                "GITHUB_CALLBACK_URL": "http://localhost:8080/api/sessions/githubcallback"
+            },
+            "restart": true,
+            "runtimeExecutable": "nodemon"
+        }
+
+    ]
+
+}

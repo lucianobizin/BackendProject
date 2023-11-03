@@ -1,0 +1,35 @@
+<h1 class="login-header">Login</h1>
+
+<form id="loginForm" class="login-form">
+
+    <label for="loginUsername" class="login-label">Email: </label>
+    <input type="text" name="email" class="login-input" autocomplete="current-password">
+
+    <label for="loginPassword" class="login-label">Password: </label>
+    <input type="password" name="password" class="login-input" autocomplete="current-password">
+
+    <input type="submit" value="Sign in" class="login-button">
+
+</form>
+<div class="login-buttons">
+    <div>
+        <p class="login-provider-text">You can access with Google</p>
+        <a href="./api/sessions/google" class="login-provider-link">
+            <button class="login-provider-button">Google</button>
+        </a>
+    </div>
+</div>
+<div class="login-buttons">
+    <div>
+        <p class="login-provider-text">You can access with Github</p>
+        <a href="./api/sessions/github" class="login-provider-link">
+            <button class="login-provider-button">Github</button>
+        </a>
+    </div>
+</div>
+<div class="login-buttons">
+    <button id="buttonRegister" class="register-button">Register</button>
+</div>
+
+
+<script src="./js/login.js"></script>
