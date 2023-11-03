@@ -9,7 +9,7 @@ class CartsRouter extends BaseRouter {
 
         this.get("/:cid", ["USER"], cartsController.getCart);
 
-        this.post("/", ["AUTH"], cartsController.postNewCart); // ADMIN
+        this.post("/", ["ADMIN"], cartsController.postNewCart); // ADMIN
 
         this.post("/:cid/product/:pid", ["PUBLIC"], cartsController.postCart);
 
