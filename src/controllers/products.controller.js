@@ -21,12 +21,14 @@ const getProducts = async (req, res, next) => {
 
         const products = await productsService.getProducts(limit, page, sort, filter)
 
+        req.httpLog();
+
         res.sendSuccessWithPayload(products)
 
     } catch (error) {
 
         await errorsHandler(error, next);
-        // res.sendInternalError("Something goes wrong");
+
     }
 
 };
@@ -45,7 +47,7 @@ const getMockProducts = async (req, res, next) => {
 
         }
 
-        console.log(mockProductsList)
+        req.httpLog();
 
         res.sendSuccessWithPayload(mockProductsList);
 
@@ -87,9 +89,6 @@ const postProducts = async (req, res, next) => {
             status,
         }
 
-        // Mapping all images and saving from this part and adding it to newProduct with the property thumbnail
-        // const images = req.files.map(file => `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/img/${file.filename}`);
-
         const googleStorageService = new CloudStorageService();
 
         const images = [];
@@ -99,11 +98,14 @@ const postProducts = async (req, res, next) => {
             const url = await googleStorageService.uploadFileToCloudStorage(file);
 
             images.push(url);
+            
         }
 
         newProduct.thumbnail = images;
 
         const result = await productsService.createProduct(newProduct);
+
+        req.httpLog();
 
         res.sendSuccessWithPayload(result._id);
 
@@ -145,6 +147,8 @@ const putProducts = async (req, res, next) => {
 
         await productsService.updateProduct(req.pid, updatedProduct);
 
+        req.httpLog();
+
         res.sendSuccess(`Product with id ${req.pid} was updated`)
 
     } catch (error) {
@@ -164,6 +168,8 @@ const deleteProducts = async (req, res, next) => {
         if (!product) return res.sendIncorrectParameters(`Product with id ${req.pid} does not exist`);
 
         await productsService.deleteProduct(req.pid);
+
+        req.httpLog();
 
         res.sendSuccess(`Product with id ${req.pid} was deleted`);
 

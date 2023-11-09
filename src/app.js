@@ -10,6 +10,8 @@ import initializePassport from './config/passport.config.js';
 import { __dirname } from "./utils.js";
 import config from "./config/config.js";
 
+import attachLogger from "./middlewares/attachLogger.js";
+
 import productsRouter from "./routes/products.router.js";
 import viewsRouter from "./routes/views.router.js";
 import cartsRouter from "./routes/carts.router.js";
@@ -17,6 +19,7 @@ import SessionsRouter from "./routes/sessions.router.v2.js";
 import messageRouter from "./routes/message.router.js";
 
 import registerChatHandler from "./listeners/chat.listener.js";
+
 
 const app = express();
 
@@ -46,6 +49,8 @@ app.use(compression({
 	}
 }));
 
+app.use(attachLogger);
+
 initializePassport();
 
 app.use("/", viewsRouter)
@@ -56,14 +61,16 @@ app.use("/api/messages", messageRouter)
 
 app.use((error, req, res, next) => {
     
-    console.log("ERROR IN APP ---> \n", error);
+    // console.log("ERROR IN APP ---> \n", error);
+
+    req.errorLog(error.name)
 
     // Plan de acción luego de haber identificado y controlado el error
     if(error.sendMail){
 
         console.log("Se envió un email con el error")
     }
-    res.status(500).send("Server error");
+    res.status(500).send("Something goes wrong");
 })
 
 const io = new Server(server);

@@ -22,8 +22,6 @@ loginForm.addEventListener("submit", async (e) => {
 
     const result = await response.json();
 
-    console.log("result -> ", result)
-
     if(result.status === "success"){
         window.location.replace('/products')
     } else {

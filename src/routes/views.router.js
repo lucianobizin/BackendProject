@@ -19,6 +19,8 @@ class ViewsRouter extends BaseRouter {
         this.get("/product/:pid", ["PUBLIC"], viewsController.getProductInfo)
         this.get("/carts/:cid", ["AUTH"], viewsController.getCartById);
 
+        this.get("/loggerTester", ["PUBLIC"], viewsController.getLoggers)
+
         // this.get("*", ["PUBLIC"], viewsController.getDoesNotExistPage);
     }
 }

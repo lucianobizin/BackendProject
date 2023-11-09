@@ -5,6 +5,8 @@ const getRegisterPage = async (req, res, next) => {
 
     try {
 
+        req.httpLog();
+
         res.renderPage('Register');
 
     } catch (error) {
@@ -17,6 +19,8 @@ const getRegisterPage = async (req, res, next) => {
 const getLoginPage = async (req, res, next) => {
 
     try {
+
+        req.httpLog();
 
         res.renderPage('Login', { css: "./css/login.css" });
 
@@ -33,6 +37,8 @@ const getProfilePage = async (req, res, next) => {
     try {
 
         const user = req.user;
+
+        req.httpLog();
 
         res.renderPage("Profile", { user });
 
@@ -88,6 +94,8 @@ const getRenderedProducts = async (req, res, next) => {
         // Por passportCall y passport.config => req.user = null || user
         const user = req.user;
 
+        req.httpLog();
+
         res.renderPage("Home", {
             css: `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/css/home.css`,
             products,
@@ -119,6 +127,8 @@ const getProductInfo = async (req, res, next) => {
 
         const css = `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/css/product.css`
 
+        req.httpLog();
+
         res.renderPage("Product", {
             css,
             product
@@ -142,12 +152,13 @@ const getCartById = async (req, res, next) => {
 
         if (!cart.products || !Array.isArray(cart.products)) return res.sendIncorrectParameters("Cart products are missing or not an array");
 
+        req.httpLog();
+
         res.renderPage("Cart", { cart });
 
     } catch (e) {
 
         await errorsHandler(error, next);
-        // res.sendInternalError("Error retrieving cart");
 
     }
 
@@ -156,6 +167,9 @@ const getCartById = async (req, res, next) => {
 const getDoesNotExistPage = async (req, res, next) => {
 
     try {
+
+        req.httpLog();
+
         res.sendPageDoesNotExist("Page doesn't exist");
 
     } catch (error) {
@@ -166,6 +180,25 @@ const getDoesNotExistPage = async (req, res, next) => {
 
 }
 
+const getLoggers = async (req, res, next) => {
+
+    try {
+
+        req.fatalLog("Probando fatal logger");
+        req.errorLog("Probando error logger");
+        req.warningLog("Probando warning logger");
+        req.httpLog();
+        req.infoLog("Probando info logger");
+
+        res.sendSuccess("All logger in one endpoint, please revise VSC console");
+
+    } catch (error) {
+
+        await errorsHandler(error, next);
+
+    }
+}
+
 export default {
 
     getRegisterPage,
@@ -174,6 +207,7 @@ export default {
     getRenderedProducts,
     getProductInfo,
     getCartById,
-    getDoesNotExistPage
+    getDoesNotExistPage,
+    getLoggers
 
 }

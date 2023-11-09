@@ -9,9 +9,9 @@ const getCurrent = async (req, res, next) => {
 
         const formattedUser = UsersDto.formatUser(req.user);
 
-        res.sendSuccessWithPayload(formattedUser);
+        req.httpLog();
 
-        // res.sendSuccessWithPayload(userToShow);
+        res.sendSuccessWithPayload(formattedUser);
 
     } catch (error) {
 
@@ -26,6 +26,8 @@ const postRegister = async (req, res, next) => {
     try {
 
         res.clearCookie("cart");
+
+        req.httpLog();
 
         res.sendSuccessWithPayload(req.user);
 
@@ -46,12 +48,11 @@ const postLogin = async (req, res, next) => {
             const tokenizedUser = {
 
                 _id: req.user._id,
-                // firstName: req.user.firstName,
-                // lastName: req.user.lastName,
                 email: req.user.email,
                 userName: req.user.userName,
                 role: req.user.role,
                 cart: req.user.cart
+
             }
 
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
@@ -61,7 +62,10 @@ const postLogin = async (req, res, next) => {
             res.clearCookie('cart');
 
             const cart = req.user.cart;
+
             res.cookie("cart", cart.toString());
+
+            req.httpLog();
 
             res.sendSuccess("Logged in");
 
@@ -77,6 +81,8 @@ const postLogin = async (req, res, next) => {
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true });
 
             res.clearCookie("cart");
+
+            req.warningLog("Admin connected: some critical processes might be permanently changed")
 
             res.sendSuccess("Logged in");
         }
@@ -100,8 +106,6 @@ const postLoginGithubCallback = async (req, res, next) => {
             const tokenizedUser = {
 
                 _id: req.user._id,
-                // firstName: req.user.firstName,
-                // lastName: req.user.lastName,
                 email: req.user.email,
                 userName: req.user.userName,
                 role: req.user.role,
@@ -111,6 +115,8 @@ const postLoginGithubCallback = async (req, res, next) => {
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true }); // authCookie
+
+            req.httpLog();
 
             res.redirectPage('/products');
 
@@ -127,6 +133,8 @@ const postLoginGithubCallback = async (req, res, next) => {
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true });
 
             res.clearCookie("cart");
+
+            req.warningLog("Admin connected: some critical processes might be permanently changed")
 
             res.redirectPage('/products');
 
@@ -151,8 +159,6 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
             const tokenizedUser = {
                 _id: req.user._id,
-                // firstName: req.user.firstName,
-                // lastName: req.user.lastName,
                 email: req.user.email,
                 userName: req.user.userName,
                 role: req.user.role,
@@ -162,6 +168,8 @@ const postLoginGoogleCallback = async (req, res, next) => {
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true }); // authCookie
+
+            req.httpLog();
 
             res.redirectPage('/products');
 
@@ -179,6 +187,8 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
             res.clearCookie("cart");
 
+            req.warningLog("Admin connected: some critical processes might be permanently changed")
+
             res.redirectPage('/products');
 
         }
@@ -186,7 +196,6 @@ const postLoginGoogleCallback = async (req, res, next) => {
     } catch (error) {
 
         await errorsHandler(error, next);
-        // res.sendInternalError("Something goes wrong with the server, please, try in a few minutes");
 
     }
 
@@ -195,6 +204,8 @@ const postLoginGoogleCallback = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
 
     try {
+
+        req.httpLog();
 
         res.sendSuccessWithPayload(req.user);
 
@@ -213,6 +224,8 @@ const postLogout = async (req, res, next) => {
         res.clearCookie(config.JWT.COOKIE);
 
         res.clearCookie("cart");
+
+        req.httpLog();
 
         return res.sendSuccess("Successfully logged out");
 

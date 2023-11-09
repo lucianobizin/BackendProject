@@ -9,7 +9,9 @@ const passportCall = (strategy, options={}) => {
             if (error) return next(error);         
 
             if (!options.strategyType){
+
                 return res.sendInternalError('strategyType not defined')
+            
             }
 
             if (!user) {
@@ -17,15 +19,23 @@ const passportCall = (strategy, options={}) => {
                 switch(options.strategyType){
 
                     case 'LOCALS':{
+
                         return res.status(401).send({status:"error",error:info.message?info.message:info.toString()})
+
                     }
+
                     case 'JWT': {
+
                         req.user = null;
+
                         return next();
+
                     }
 
                     case 'OAUTH': {
+
                         return res.status(401).send({status:"error",error:info.message?info.message:info.toString()})
+                        
                     }
                 }
             };

@@ -7,7 +7,6 @@ export default class UsersDao{ // usersDao
     // };
 
     getBy = (param) => {
-        console.log(param)
         return usersModel.findOne(param).lean();
     };
     

@@ -19,10 +19,14 @@ const getMessages = async (req, res, next) => {
         };
 
         if (room) {
+
             searchFilter.room = room;
+            
         }
 
         const messages = await messagesService.getMessages(searchFilter);
+
+        req.httpLog();
 
         res.sendSuccessWithPayload(messages);
 

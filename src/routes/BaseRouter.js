@@ -17,19 +17,35 @@ export default class BaseRouter {
     }
 
     get(path, policies,...callbacks){
-        this.router.get(path, this.obtainingParamsQueries, this.generateCustomResposes, passportCall('jwt', { strategyType: 'JWT' }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
+        this.router.get(path, this.usingLogger, this.obtainingParamsQueries, this.generateCustomResposes, passportCall('jwt', { strategyType: 'JWT' }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
     }
 
     post(path, policies,...callbacks){
-        this.router.post(path, this.obtainingParamsQueries, this.generateCustomResposes, passportCall('jwt', { strategyType: 'JWT' }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
+        this.router.post(path, this.usingLogger, this.obtainingParamsQueries, this.generateCustomResposes, passportCall('jwt', { strategyType: 'JWT' }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
     }
 
     put(path, policies,...callbacks){
-        this.router.put(path, this.obtainingParamsQueries, this.generateCustomResposes, passportCall("jwt", { strategyType: "JWT" }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
+        this.router.put(path, this.usingLogger, this.obtainingParamsQueries, this.generateCustomResposes, passportCall("jwt", { strategyType: "JWT" }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
     }
 
     delete(path, policies,...callbacks){
-        this.router.delete(path, this.obtainingParamsQueries, this.generateCustomResposes, passportCall("jwt", { strategyType: "JWT" }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
+        this.router.delete(path, this.usingLogger, this.obtainingParamsQueries, this.generateCustomResposes, passportCall("jwt", { strategyType: "JWT" }), cartSetter, executePolicies(policies), this.applyCallbacks(callbacks))
+    }
+
+    usingLogger(req, res, next) {
+
+        req.fatalLog =  (fatalMessage) => req.logger.fatal(`[FATAL] ---> ${fatalMessage}`);
+        req.errorLog = (errorMessage) => req.logger.error(`[ERROR] ---> ${errorMessage}`);
+        req.warningLog = (warningMessage) => req.logger.warning(`[WARNING] ---> ${warningMessage}`);
+        req.httpLog = () => {
+            const ip = req.connection.remoteAddress
+            const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+            req.logger.http(`[HTTP] ---> email: ${req.user?.email ? req.user.email : null} - ${req.method} - ${ip} - ${fullUrl} - ${new Date().toLocaleTimeString()}`);
+        }
+        req.infoLog = (infoMessage) => req.logger.info(`[INFO] ---> ${infoMessage}`);
+
+        next();
+
     }
 
     generateCustomResposes(req, res, next) {
@@ -46,6 +62,8 @@ export default class BaseRouter {
     }
 
     obtainingParamsQueries(req, res, next) {
+
+        // req.httpLog()
 
         const pid = /^[0-9a-zA-Z]+$/.test(req.params.pid) ? req.params.pid : "";
         const cid = /^[0-9a-zA-Z]+$/.test(req.params.cid) ? req.params.cid : "";

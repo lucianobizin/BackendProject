@@ -63,7 +63,7 @@ const initializePassport = () => {
 
             newUser.cart = cart;
 
-            const result = await usersService.createUser(newUser); // Y si falla algo después se creó igual?
+            const result = await usersService.createUser(newUser);
 
             done(null, result);
 

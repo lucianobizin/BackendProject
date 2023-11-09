@@ -13,6 +13,8 @@ const getCarts = async (req, res, next) => { // Se agregó el next
 
                 const carts = await cartsService.getCarts().limit(limit)
 
+                req.httpLog();
+
                 res.sendSuccessWithPayload(carts);
 
             } else {
@@ -50,6 +52,8 @@ const getCart = async (req, res, next) => {
 
             const cart = await cartsService.getCartById({ _id: cid })
 
+            req.httpLog();
+
             res.sendSuccessWithPayload(cart)
 
         } catch (e) {
@@ -70,11 +74,11 @@ const postNewCart = async (req, res, next) => {
 
     try {
 
-        console.log(result)
-
         const result = await cartsService.createCart();
 
         if (result) {
+
+            req.httpLog();
 
             return res.sendSuccessWithPayload(result._id);
 
@@ -124,6 +128,8 @@ const postCart = async (req, res, next) => {
 
             await cartsService.updateCart(cid, cart.products);
 
+            req.httpLog();
+
             res.sendSuccess(`Cart updated with product ${product._id} and quantity ${quantity}`);
 
         } catch (e) {
@@ -153,6 +159,8 @@ const putCart = async (req, res, next) => {
         if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
 
         await cartsService.updateCart(cid, products);
+
+        req.httpLog();
 
         return res.sendSuccess(`Cart with ID ${cid} has been updated with new products`);
 
@@ -185,6 +193,8 @@ const putCartNotLoggedIn = async (req, res) => {
             productToUpdate.quantity = quantity
 
             await cartsService.updateCart(req.user.library, { cart: cart.products });
+
+            req.httpLog();
 
             return res.sendSuccess(`Product with ID ${pid} in cart ${cid} has been updated with quantity ${quantity}`);
 
@@ -226,6 +236,8 @@ const putUpdateProducts = async (req, res, next) => {
             productToUpdate.quantity = quantity;
 
             await cartsService.updateCart(cid, cart.products);
+
+            req.httpLog();
 
             return res.sendSuccess(`Product with ID ${pid} in cart ${cid} has been updated with quantity ${quantity}`);
 
@@ -269,6 +281,8 @@ const deleteProductsFromCart = async (req, res, next) => {
 
             await cartsService.updateCart(cid, cart.products)
 
+            req.httpLog();
+
             return res.sendSuccess(`Product with ID ${pid} has been removed from the cart with ID ${cid}`);
         }
 
@@ -303,6 +317,8 @@ const deleteCart = async (req, res, next) => {
 
             await cartsService.updateCart(cid, cart.products);
 
+            req.httpLog();
+
             res.sendSuccess(`All products of Cart with id ${cid} were deleted`);
 
         } catch (error) {
@@ -322,63 +338,6 @@ const deleteCart = async (req, res, next) => {
 }
 
 const endPurchase = async (req, res, next) => {
-
-    // DEJO EL CÓDIGO ANTERIOR PORQUE ESTUVE PROBANDO LA OPTIMIZACIÓN CON UNA SOLA LLAMADA A LA BASE DE DATOS
-    // EN VEZ DE HACER UNA LLAMADA POR CADA PRODUCTO EN EL CARRITO
-
-    // // Identificar el carrito del user para traer su carro completo
-
-    // const userCart = req.user.cart;
-
-    // if(!userCart) res.sendIncorrectParameters("There is no cart associated to this user");
-
-    // const cart = await cartsService.getCartById({ _id: userCart});
-
-    // if(!cart) res.sendIncorrectParameters("Cart does not exist");
-
-    // // Comprobar que los stocks de los productos del carrito no estén acabados
-
-    // // -- Construir la lista de productos (no) disponibles y del nuevo stock de cada producto
-
-    // const availableCartProducts = [];
-
-    // const unavailableCartProducts = [];
-
-    // const newProductsStock = [];
-
-    // // -- Obtener los productos del carrito del usuario
-
-    // for(let product of cart.products){
-
-    //     let pid = product.pid._id;
-
-    //     let quantity = product.quantity;
-
-    //     let price = product.pid.price;
-
-    //     // Revisar la cantidad de esos productos con la cantidad del stock 
-
-    //     let tempProduct = await productsService.getProductsById({_id: pid});
-
-    //     if(tempProduct.stock >= quantity){
-
-    //         availableCartProducts.push({pid: pid, price: price, quantity: quantity});
-
-    //         // Si hay stock para hacer la compra restarle la cantidad al stock del producto
-    //         let newProductStock = tempProduct.stock - quantity;
-
-    //         console.log("tempProduct.stock ---> ", tempProduct.stock)
-
-    //         newProductsStock.push({pid:pid, quantity:newProductStock});
-
-    //     } else {
-
-    //         // Si no hay stock para hacer la compra descartar el producto para el ticket y dejarlo en el carrito
-    //         unavailableCartProducts.push({pid: pid, quantity: quantity})
-
-    //     }
-
-    // }
 
     // Identificar el carrito del usuario para traer su carrito completo
 
@@ -401,14 +360,10 @@ const endPurchase = async (req, res, next) => {
             quantity: product.quantity,
         }));
 
-        console.log("productsToCheck ---> ", productsToCheck)
-
         // Obtener la información de los productos en una sola consulta a la base de datos
         let productsInCart = await productsService.getProductsByIds(
             productsToCheck.map(product => product.pid)
         );
-
-        console.log("productsInCart ---> ", productsInCart)
 
         // Construir la lista de productos (no) disponibles y el nuevo stock de cada producto
         const availableCartProducts = [];
@@ -418,8 +373,6 @@ const endPurchase = async (req, res, next) => {
         for (let i = 0; i < productsToCheck.length; i++) {
             let productToCheck = productsToCheck[i];
             let productInfo = productsInCart.find(product => product._id.toString() === productToCheck.pid.toString());
-
-            console.log("productInfo ---> ", productInfo)
 
             if (productInfo && productInfo.stock >= productToCheck.quantity) {
                 availableCartProducts.push({
@@ -441,10 +394,6 @@ const endPurchase = async (req, res, next) => {
             }
         }
 
-        console.log("availableCartProducts ---> ", availableCartProducts)
-        console.log("unavailableCartProducts ---> ", unavailableCartProducts)
-        console.log("newProductsStock ---> ", newProductsStock)
-
         // Generar un ticket, con los datos requeridos => _id: autogenerado por Mongo y único, code: autogenerado por programador y único, fecha y hora de compra, total de la compra y purchaser (email)
         let purchase_datetime;
 
@@ -464,18 +413,12 @@ const endPurchase = async (req, res, next) => {
 
         }
 
-        console.log("purchase_datetime ---> ", purchase_datetime)
-        console.log("tempCode ---> ", tempCode)
-        console.log("checkingTempCode ---> ", checkingTempCode)
-
         // Generando la suma de amount
 
         let totalPurchase = availableCartProducts.reduce((accumulator, product) => {
             let tempProdSum = product.quantity * product.price;
             return accumulator + tempProdSum;
         }, 0);
-
-        console.log("totalPurchase ---> ", totalPurchase)
 
         if (totalPurchase === 0) res.sendIncorrectParameters("Empty cart")
 
@@ -493,7 +436,7 @@ const endPurchase = async (req, res, next) => {
 
         };
 
-        console.log("ticket ---> ", ticket)
+        req.infoLog("ticket ---> ", ticket)
 
         // Resolución de la compra
 
@@ -507,7 +450,6 @@ const endPurchase = async (req, res, next) => {
 
             const updateStockResult = await productsService.updateProduct(newProdStock.pid, { stock: newProdStock.quantity });
             if (!updateStockResult) res.sendIncorrectParameters("There was an error when trying to update the stock of the products")
-            console.log(updateStockResult)
         };
 
         // Hay que eliminar del carro los productos del ticket, cargar los que no pudieron comprarse y actualizar el carro en base de datos
@@ -520,9 +462,9 @@ const endPurchase = async (req, res, next) => {
 
         if (!result) res.sendIncorrectParameters("User's cart was not updated, something went wrong");
 
-        console.log(result)
-
         // Devolver el ticket
+        
+        req.httpLog();
 
         res.sendSuccessWithPayload(createdTicket);
 

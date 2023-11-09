@@ -16,18 +16,13 @@ export default class ErrorFactory {
 
         errorCodes["REFERENCE"] = tempErrorCodes["REFERENCE"]
 
-        console.log("errorsDictionary[REFERENCE] ---> ", errorsDictionary["REFERENCE"])
-        console.log("errorCodes[REFERENCE] ---> ", errorCodes["REFERENCE"])
-
         switch(config.app.PERSISTENCE) {
 
             case "MONGO": {
 
                 errorsDictionary["PERSISTENCE"] = tempErrorsDictionary["PERSISTENCE"]["MONGO"];
-                console.log(errorsDictionary)
 
                 errorCodes["PERSISTENCE"] = tempErrorCodes["PERSISTENCE"]["MONGO"]
-                console.log(errorCodes)
 
                 break;
             }

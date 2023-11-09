@@ -4,8 +4,6 @@ const registerChatHandler = (io, socket) => { // We pass the io and the socket t
     
     const saveMessage = async (data) => {
 
-        console.log("chat.listener.js ---> ", data);
-
         const result = await messagesService.createMessage(data)
 
         io.to(data.room).emit("chat:logMessages", data)
@@ -13,10 +11,13 @@ const registerChatHandler = (io, socket) => { // We pass the io and the socket t
     }
 
     const joinSocketToRoom = (room) => {
+
         socket.join(room);
+    
     };
 
     socket.on("chat:message", saveMessage); // Similar to router, controller (listener is the new socket controller)
+    
     socket.on("chat:joinRoom", joinSocketToRoom);
 
 }

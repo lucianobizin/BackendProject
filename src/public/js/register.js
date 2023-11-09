@@ -27,21 +27,21 @@ registerForm.addEventListener("submit", async (e) => {
         passwordError.textContent = 'User seccessfully created! Now, you will be redirected to our login page';
         setTimeout(() => {
             window.location.replace('/login');
-        }, 3500);
+        }, 2000);
 
     } else if(result.status === 11000){
 
         passwordError.textContent = 'Email and/or username already used! Please, try other options!';
         setTimeout(() => {
             window.location.replace('/login');
-        }, 3500);
+        }, 2000);
 
     } else {
 
         passwordError.textContent = 'Something goes wrong! Please, try it again in a few minutes';
         setTimeout(() => {
             window.location.replace("/register");
-        }, 2500);
+        }, 2000);
     }
 
 })
