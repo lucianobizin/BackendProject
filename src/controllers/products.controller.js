@@ -5,6 +5,8 @@ import { errorsHandler } from "./error.controller.js";
 
 const getProducts = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
         let { limit = 10, page = 1, sort, query } = req.query;
@@ -21,8 +23,6 @@ const getProducts = async (req, res, next) => {
 
         const products = await productsService.getProducts(limit, page, sort, filter)
 
-        req.httpLog();
-
         res.sendSuccessWithPayload(products)
 
     } catch (error) {
@@ -35,6 +35,8 @@ const getProducts = async (req, res, next) => {
 
 const getMockProducts = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
         const mockProductsList = [];
@@ -46,8 +48,6 @@ const getMockProducts = async (req, res, next) => {
             mockProductsList.push(mockProducts)
 
         }
-
-        req.httpLog();
 
         res.sendSuccessWithPayload(mockProductsList);
 
@@ -62,10 +62,11 @@ const getMockProducts = async (req, res, next) => {
 
 const postProducts = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
-
-        if (req.user.role !== "admin") return res.sendForbidden("Unauthorised user");
+        if (req.user.role !== "admin" && req.user.role !== "premium") return res.sendForbidden("Unauthorised user");
 
         const {
             title,
@@ -74,38 +75,53 @@ const postProducts = async (req, res, next) => {
             stock,
             code,
             category,
-            status,
         } = req.body
+
 
         if (!title || !description || !price || !stock || !code || !category) return res.sendIncorrectParameters("Incomplete values");
 
-        const newProduct = {
-            title,
-            description,
-            price,
-            stock,
-            code,
-            category,
-            status,
+        let newProduct = {};
+
+        if (req.user.role === "premium") {
+
+            newProduct = {
+                title,
+                description,
+                price,
+                stock,
+                code,
+                category,
+                owner: req.user.email
+            }
+
+        } else if ((req.user.role === "admin")){
+
+            newProduct = {
+                title,
+                description,
+                price,
+                stock,
+                code,
+                category,
+            }
+
         }
 
         const googleStorageService = new CloudStorageService();
 
         const images = [];
 
-        for (const file of req.files) { // Aquí hay un problema
+        for (const file of req.files) {
 
             const url = await googleStorageService.uploadFileToCloudStorage(file);
 
             images.push(url);
-            
+
         }
 
         newProduct.thumbnail = images;
 
         const result = await productsService.createProduct(newProduct);
-
-        req.httpLog();
 
         res.sendSuccessWithPayload(result._id);
 
@@ -118,6 +134,8 @@ const postProducts = async (req, res, next) => {
 };
 
 const putProducts = async (req, res, next) => {
+
+    req.httpLog();
 
     try {
 
@@ -141,15 +159,26 @@ const putProducts = async (req, res, next) => {
             status
         };
 
-        const product = await productsService.getProductById({ _id: req.pid });
+        
+        const product = await productsService.getProductsById({ _id: req.pid });
 
         if (!product) return sendIncorrectParameters(`Product with id ${req.pid} does not exist`);
 
-        await productsService.updateProduct(req.pid, updatedProduct);
+        if(product.owner === "admin" && req.user.role === "premium") {
 
-        req.httpLog();
+            req.warningLog(`User ${req.user.email} with ${req.user.role} is trying to modify admin's product ${product._id}- ${new Date().toLocaleTimeString()}`);
+            
+            res.sendForbidden("Premium users are not allowed to modify admin's products");
 
-        res.sendSuccess(`Product with id ${req.pid} was updated`)
+        }
+
+        if((req.user.role === "admin") || (req.user.role === "premium" && product.owner !== "admin")) {
+
+            await productsService.updateProduct(req.pid, updatedProduct);
+    
+            res.sendSuccess(`Product with id ${req.pid} was updated`);
+
+        }
 
     } catch (error) {
 
@@ -161,17 +190,33 @@ const putProducts = async (req, res, next) => {
 
 const deleteProducts = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
-        const product = await productsService.getProductById({ _id: req.pid });
+        const product = await productsService.getProductsById(req.pid);
 
         if (!product) return res.sendIncorrectParameters(`Product with id ${req.pid} does not exist`);
 
-        await productsService.deleteProduct(req.pid);
+        if(product.owner === "admin" && req.user.role === "premium") {
 
-        req.httpLog();
+            req.warningLog(`User ${req.user.email} with ${req.user.role} is trying to delete admin's product ${product._id}- ${new Date().toLocaleTimeString()}`);
+            
+            res.sendForbidden("Premium users are not allowed to delete admin's products");
 
-        res.sendSuccess(`Product with id ${req.pid} was deleted`);
+        }
+
+        if((req.user.role === "admin") || (product.owner !== "admin" && req.user.role === "premium" && product.owner === req.user.email)) {
+
+            await productsService.deleteProduct(req.pid);
+    
+            res.sendSuccess(`Product with id ${req.pid} was deleted`);
+
+        } else {
+
+            res.sendForbidden("Your are not allowed to delete other users' products")
+
+        }
 
     } catch (error) {
 

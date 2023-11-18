@@ -43,14 +43,15 @@ const schema = new mongoose.Schema(
 
     role:{
         type:String,
-        enum:['User','admin'],
-        default: "User"
+        enum:['user',"premium", 'admin'],
+        default: "user"
     },
 
     cart:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "cart",
     }
+
 
 }, {timestamps: true});
 

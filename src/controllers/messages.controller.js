@@ -3,6 +3,7 @@ import { errorsHandler } from "./error.controller.js";
 
 const getMessages = async (req, res, next) => {
 
+    req.httpLog();
 
     try {
 
@@ -25,8 +26,6 @@ const getMessages = async (req, res, next) => {
         }
 
         const messages = await messagesService.getMessages(searchFilter);
-
-        req.httpLog();
 
         res.sendSuccessWithPayload(messages);
 

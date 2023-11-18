@@ -14,8 +14,13 @@ export default class UsersDao{ // usersDao
     //     return usersModel.create(user);
     // };
 
-    create = (param) => {
-        return usersModel.create(param);
+    create = async (param) => {
+        const result = await usersModel.create(param);
+        return result.toObject();
     };
+
+    update = async (param, updateParam) => {
+        return await usersModel.updateOne(param, updateParam);
+    }
 
 };

@@ -3,11 +3,14 @@
 {{!-- <p>First name: {{this.user.firstName}}</p>
 <p>Last name {{this.user.lastName}}</p>
 <p>Birthdate {{this.user.birthDate}}</p> --}}
-
-<p>Email {{this.user.email}}</p>
+<p id="userId">Id: {{this.user._id}}</p>
+<p>Email: {{this.user.email}}</p>
 <p>Role: {{this.user.role}}</p>
+
+<button id="upgradeRoleButton">Upgrade role</button>
 
 <button id="logoutButton">Logout</button>
 
+<script src="./js/upgradeRole.js"></script>
 <script src="./socket.io/socket.io.js"></script>
 <script src="./js/logout.js"></script>

@@ -1,0 +1,242 @@
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 23:36:30"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:10:58"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:11:26"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:11:29"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:19:30"}
+{"level":"error","message":"[ERROR] ---> Email to luciano.bizin@ucalpvirtual.edu.ar could not be sent - 11:19:30"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:19:32"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:21:32"}
+{"level":"error","message":"[ERROR] ---> [object Object]"}
+{"level":"error","message":"[ERROR] ---> Email to luciano.bizin@ucalpvirtual.edu.ar could not be sent - 11:21:32"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:21:34"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:25:54"}
+{"level":"error","message":"[ERROR] ---> Email to luciano.bizin@ucalpvirtual.edu.ar could not be sent - 11:26:38"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:26:40"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:27:39"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:29:53"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:30:28"}
+{"level":"error","message":"[ERROR] ---> Email to luciano.bizin@ucalpvirtual.edu.ar could not be sent - 11:30:28"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:30:30"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 11:31:38"}
+{"level":"error","message":"[ERROR] ---> Email to luciano.bizin@gmail.com could not be sent - 11:31:38"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:31:40"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 11:34:52"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::ffff:127.0.0.1 - http://localhost:8080/register - 11:35:38"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::ffff:127.0.0.1 - http://localhost:8080/register - 11:36:10"}
+{"level":"http","message":"[HTTP] ---> email: luciano.bizin@ucalpvirtual.edu.ar - POST - ::1 - http://localhost:8080/api/sessions/register - 11:37:15"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:39:43"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 11:40:06"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:40:23"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 11:44:26"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:44:29"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:44:59"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:46:32"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:47:31"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:47:44"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 11:48:54"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:55:40"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 11:57:59"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:03:05"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 12:03:18"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:03:44"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 12:05:44"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:08:26"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:11:22"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 12:11:35"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:13:25"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:15:26"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 12:15:38"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:19:11"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 12:19:40"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:20:47"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 12:24:37"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register?firstName=Luciano&lastName=Bizin&email=lucianobizin%40gmail.com&birthDate=1988-08-08&userName=Lucho123&password=Coder - 12:59:55"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:01:35"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:01:37"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:26:20"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:26:40"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:26:42"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:29:49"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:30:07"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:30:10"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:31:07"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:31:21"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:31:23"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:32:15"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:32:56"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:32:58"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:33:52"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:34:00"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:34:03"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:35:01"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:35:14"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:35:16"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:36:35"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:36:37"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:36:52"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:36:54"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:37:25"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:37:35"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:37:44"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:37:47"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:38:25"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:38:27"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:38:43"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:38:46"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:39:49"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:40:01"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:40:04"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:43:31"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:43:44"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:46:02"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:49:52"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 13:50:17"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:51:19"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:51:45"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:54:50"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:55:06"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 13:58:55"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/register - 13:59:06"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 14:01:39"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 14:01:49"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:02:07"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:06:16"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:07:21"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/passwordRestoreRequest - 14:07:32"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:19:56"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/passwordRestoreRequest - 14:20:03"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:21:00"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/passwordRestoreRequest - 14:21:07"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 14:21:36"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/passwordRestoreRequest - 14:22:04"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/sessions/passwordRestoreRequest - 14:25:46"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:25:59"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:06"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:17"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:18"}
+{"level":"http","message":"[HTTP] ---> email: null - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:26:19"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/login - 14:28:22"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 14:28:22"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:28:35"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:28:37"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:28:37"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:28:37"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:28:37"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:30:22"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:30:42"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:31:16"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:36:14"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:36:18"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:36:55"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:36:56"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:36:56"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:37:03"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:08"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:33"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:33"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:38"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:39"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:39"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:37:39"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:41:19"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:41:22"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:42:08"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:42:20"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:43:07"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:43:10"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:43:29"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:43:31"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:43:34"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:44:15"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:44:50"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:44:55"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 14:45:51"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:46:53"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:56:28"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 14:59:59"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:03:17"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::ffff:127.0.0.1 - http://localhost:8080/api/sessions/password-restore - 15:03:23"}
+{"level":"error","message":"[ERROR] ---> undefined"}
+{"level":"error","message":"[ERROR] ---> undefined"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:05:43"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:05:47"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:08:28"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:08:34"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:14:55"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:14:59"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:18:01"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:18:05"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:22:28"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:22:32"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:23:54"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:26:07"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:27:40"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:30:57"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:32:36"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:32:41"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"error","message":"[ERROR] ---> Coder1234"}
+{"level":"error","message":"[ERROR] ---> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:53:34"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:53:37"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:57:14"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:57:18"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 15:59:10"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 15:59:14"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 16:02:56"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 16:03:00"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/password-restore?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2lhbm9iaXppbkBnbWFpbC5jb20iLCJpYXQiOjE3MDAzMTM5NDYsImV4cCI6MTcwMDQwMDM0Nn0.g85S8eXpuMWlt9jiajMOByebwZyUNXi-jyUbMEq1ZUo - 16:06:30"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - PUT - ::1 - http://localhost:8080/api/sessions/password-restore - 16:06:34"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:13:13"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:14:27"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/login - 16:14:34"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 16:14:34"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:14:47"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 16:14:53"}

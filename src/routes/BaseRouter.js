@@ -53,11 +53,12 @@ export default class BaseRouter {
         res.redirectPage = (page) => res.redirect(page);
         res.sendSuccess = message_ => res.status(200).send({ status: "success", message: message_ });
         res.sendSuccessWithPayload = payload_ => res.status(200).send({ status: "success", payload: payload_ });
-        res.sendInternalError = error => res.status(500).send({ status: "error", error });
+        res.sendBadRequest = error => res.status(400).send({status:"error", error: error})
+        res.sendIncorrectParameters = error => res.status(400).send({ status: "error", error });
         res.sendUnauthorized = error => res.status(401).send({ status: "error", error });
         res.sendForbidden = error => res.status(403).send({ status: "error", error });
-        res.sendIncorrectParameters = error => res.status(400).send({ status: "error", error });
         res.sendPageDoesNotExist = error => res.status(404).send({ status: "error", error });
+        res.sendInternalError = error => res.status(500).send({ status: "error", error });
         next();
     }
 
@@ -67,6 +68,7 @@ export default class BaseRouter {
 
         const pid = /^[0-9a-zA-Z]+$/.test(req.params.pid) ? req.params.pid : "";
         const cid = /^[0-9a-zA-Z]+$/.test(req.params.cid) ? req.params.cid : "";
+        const uid = /^[0-9a-zA-Z]+$/.test(req.params.uid) ? req.params.uid : "";
         const prodQuantity = isNaN(parseInt(req.query.quantity)) ? NaN : parseInt(req.query.quantity);
 
         if(pid){
@@ -79,6 +81,10 @@ export default class BaseRouter {
 
         if(prodQuantity){
             req.quantity = prodQuantity;
+        }
+
+        if(uid){
+            req.uid = uid;
         }
         
         next();

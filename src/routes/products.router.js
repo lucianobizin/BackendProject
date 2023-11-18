@@ -10,11 +10,11 @@ class ProductsRouter extends BaseRouter{
 
         this.get("/mockingproducts", ["AUTH"], productsController.getMockProducts);
 
-        this.post("/", ["ADMIN"], uploader.array("images"), productsController.postProducts);
+        this.post("/", ["PREMIUM", "ADMIN"], uploader.array("images"), productsController.postProducts);
 
-        this.put("/:pid", ["ADMIN"], productsController.putProducts);
+        this.put("/:pid", ["PREMIUM", "ADMIN"], productsController.putProducts);
 
-        this.delete("/:pid", ["ADMIN"], productsController.deleteProducts);
+        this.delete("/:pid", ["PREMIUM", "ADMIN"], productsController.deleteProducts);
         
     }
 }

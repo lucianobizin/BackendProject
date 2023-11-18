@@ -2,14 +2,18 @@ import jwt from "jsonwebtoken";
 import config from "../config/config.js";
 import UsersDto from "../dto/UsersDto.js";
 import { errorsHandler } from "./error.controller.js";
+import { usersService } from "../services/index.js";
+import DMailTemplates from "../constants/DMailTemplates.js";
+import { createHash, isValidPassword } from "../utils.js";
+import MailerService from "../services/mailerService.js";
 
 const getCurrent = async (req, res, next) => {
+
+    req.httpLog();
 
     try {
 
         const formattedUser = UsersDto.formatUser(req.user);
-
-        req.httpLog();
 
         res.sendSuccessWithPayload(formattedUser);
 
@@ -23,23 +27,35 @@ const getCurrent = async (req, res, next) => {
 
 const postRegister = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
-        res.clearCookie("cart");
+        const mailService = new MailerService();
 
-        req.httpLog();
+        console.log(req.user)
+        console.log(req.user.email)
 
-        res.sendSuccessWithPayload(req.user);
+        const result = await mailService.sendMail([req.user.email], DMailTemplates.WELCOME, { user: req.user });
 
     } catch (error) {
 
-        await errorsHandler(error, next);
+        console.log(error)
 
+        // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+
+        // await errorsHandler(error, next);
     }
+
+    res.clearCookie("cart");
+
+    res.sendSuccessWithPayload(req.user);
 
 }
 
 const postLogin = async (req, res, next) => {
+
+    req.httpLog();
 
     try {
 
@@ -64,8 +80,6 @@ const postLogin = async (req, res, next) => {
             const cart = req.user.cart;
 
             res.cookie("cart", cart.toString());
-
-            req.httpLog();
 
             res.sendSuccess("Logged in");
 
@@ -99,9 +113,26 @@ const postLoginGithub = async (req, res) => { }
 
 const postLoginGithubCallback = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
         if (req.user.role !== "admin") { // req.user = User
+
+            try {
+
+                const mailService = new MailerService();
+
+                const result = await mailService.sendMail([req.user.email], DMailTemplates.WELCOME, { user: req.user });
+
+            } catch (error) {
+
+                console.log(error)
+
+                // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+
+                // await errorsHandler(error, next);
+            }
 
             const tokenizedUser = {
 
@@ -115,8 +146,6 @@ const postLoginGithubCallback = async (req, res, next) => {
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true }); // authCookie
-
-            req.httpLog();
 
             res.redirectPage('/products');
 
@@ -153,9 +182,26 @@ const postLoginGoogle = async (req, res) => { }
 
 const postLoginGoogleCallback = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
         if (req.user.role !== "admin") { // req.user = User
+
+            try {
+
+                const mailService = new MailerService();
+
+                const result = await mailService.sendMail([req.user.email], DMailTemplates.WELCOME, { user: req.user });
+
+            } catch (error) {
+
+                console.log(error)
+
+                // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+
+                // await errorsHandler(error, next);
+            }
 
             const tokenizedUser = {
                 _id: req.user._id,
@@ -168,8 +214,6 @@ const postLoginGoogleCallback = async (req, res, next) => {
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
             res.cookie(config.JWT.COOKIE, token, { httpOnly: true }); // authCookie
-
-            req.httpLog();
 
             res.redirectPage('/products');
 
@@ -203,9 +247,9 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
 const getProfile = async (req, res, next) => {
 
-    try {
+    req.httpLog();
 
-        req.httpLog();
+    try {
 
         res.sendSuccessWithPayload(req.user);
 
@@ -219,19 +263,90 @@ const getProfile = async (req, res, next) => {
 
 const postLogout = async (req, res, next) => {
 
+    req.httpLog();
+
     try {
 
         res.clearCookie(config.JWT.COOKIE);
 
         res.clearCookie("cart");
 
-        req.httpLog();
-
         return res.sendSuccess("Successfully logged out");
 
     } catch (error) {
 
         await errorsHandler(error, next);
+
+    }
+
+}
+
+const passwordRestoreRequest = async (req, res, next) => {
+
+    req.httpLog();
+
+    try {
+
+        const { email } = req.body;
+
+        const user = await usersService.getUserBy({ email: email });
+
+        if (!user) return res.sendBadRequest("User is not registerd in our database");
+
+        const token = jwt.sign({ email }, config.JWT.SECRET, { expiresIn: "1d" });
+
+        const mailerService = new MailerService();
+
+        const result = await mailerService.sendMail([email], DMailTemplates.PWD_RESTORE, { token });
+
+        res.sendSuccess("Email sent")
+
+    } catch (error) {
+
+        console.log(error)
+
+        res.errorsHandler(error, next)
+
+    }
+
+
+}
+
+const restorePassword = async (req, res, next) => {
+
+    req.httpLog();
+
+    const { newPassword, token } = req.body;
+
+    if (!newPassword || !token) return res.sendIncorrectParameters("Incomplete values");
+
+    try {
+
+        const { email } = jwt.verify(token, config.JWT.SECRET);
+
+        console.log(email)
+
+        const user = await usersService.getUserBy({ email: email });
+
+        if (!user) return res.sendIncorrectParameters("User does not exist");
+
+        const isSamePassword = await isValidPassword(user, user.password);
+
+        if (isSamePassword) return res.sendIncorrectParameters("New password must be different respect to the last one");
+
+        const hashedNewPassword = await createHash(newPassword);
+
+        const result = await usersService.passwordUpdate(user._id, hashedNewPassword);
+
+        console.log(result)
+
+        res.sendSuccess("Password updated");
+
+    } catch (error) {
+
+        console.log(error)
+
+        // await errorsHandler(error, next);
 
     }
 
@@ -247,6 +362,8 @@ export default {
     postLoginGoogle,
     postLoginGoogleCallback,
     getProfile,
-    postLogout
+    postLogout,
+    passwordRestoreRequest,
+    restorePassword
 
 }

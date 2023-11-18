@@ -97,6 +97,8 @@ const postNewCart = async (req, res, next) => {
 
 const postCart = async (req, res, next) => {
 
+    req.httpLog();
+
     const cid = req.cid
     const pid = req.pid
     const quantity = req.quantity
@@ -107,7 +109,15 @@ const postCart = async (req, res, next) => {
 
             if (!quantity) return res.sendIncorrectParameters("Quantity parameter needed");
 
-            const product = await productsService.getProductsById({ _id: pid });
+            const product = await productsService.getProductsById(pid);
+
+            if(product.owner === req.user.email) {
+
+                req.warningLog(`User ${req.user.email} with role ${req.user.role} is trying to add to cart one of his/her products - Product ID ${product._id} - ${new Date().toLocaleTimeString()}`);
+
+                return res.sendForbidden("Premium users are not allowed to add their products to their carts")
+
+            } 
 
             if (!product) return res.sendIncorrectParameters(`No product with id ${pid}`);
 
@@ -128,8 +138,6 @@ const postCart = async (req, res, next) => {
 
             await cartsService.updateCart(cid, cart.products);
 
-            req.httpLog();
-
             res.sendSuccess(`Cart updated with product ${product._id} and quantity ${quantity}`);
 
         } catch (e) {
@@ -147,10 +155,11 @@ const postCart = async (req, res, next) => {
 
 const putCart = async (req, res, next) => {
 
+    req.httpLog();
+
     const cid = req.params.cid;
 
     const products = req.body;
-
 
     try {
 
@@ -159,8 +168,6 @@ const putCart = async (req, res, next) => {
         if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
 
         await cartsService.updateCart(cid, products);
-
-        req.httpLog();
 
         return res.sendSuccess(`Cart with ID ${cid} has been updated with new products`);
 
@@ -173,6 +180,8 @@ const putCart = async (req, res, next) => {
 }
 
 const putCartNotLoggedIn = async (req, res) => {
+
+    req.httpLog();
 
     const cid = req.cid
     const pid = req.pid
@@ -193,8 +202,6 @@ const putCartNotLoggedIn = async (req, res) => {
             productToUpdate.quantity = quantity
 
             await cartsService.updateCart(req.user.library, { cart: cart.products });
-
-            req.httpLog();
 
             return res.sendSuccess(`Product with ID ${pid} in cart ${cid} has been updated with quantity ${quantity}`);
 
@@ -217,6 +224,8 @@ const putCartNotLoggedIn = async (req, res) => {
 
 const putUpdateProducts = async (req, res, next) => {
 
+    req.httpLog();
+
     const pid = req.params.pid;
 
     const { quantity } = req.body;
@@ -236,8 +245,6 @@ const putUpdateProducts = async (req, res, next) => {
             productToUpdate.quantity = quantity;
 
             await cartsService.updateCart(cid, cart.products);
-
-            req.httpLog();
 
             return res.sendSuccess(`Product with ID ${pid} in cart ${cid} has been updated with quantity ${quantity}`);
 
@@ -261,6 +268,8 @@ const putUpdateProducts = async (req, res, next) => {
 
 const deleteProductsFromCart = async (req, res, next) => {
 
+    req.httpLog();
+
     const cid = req.params.cid;
 
     const pid = req.params.pid;
@@ -280,8 +289,6 @@ const deleteProductsFromCart = async (req, res, next) => {
             cart.products.splice(productIndex, 1);
 
             await cartsService.updateCart(cid, cart.products)
-
-            req.httpLog();
 
             return res.sendSuccess(`Product with ID ${pid} has been removed from the cart with ID ${cid}`);
         }
@@ -303,6 +310,8 @@ const deleteProductsFromCart = async (req, res, next) => {
 
 const deleteCart = async (req, res, next) => {
 
+    req.httpLog();
+
     const cid = req.params.cid;
 
     if (cid) {
@@ -316,8 +325,6 @@ const deleteCart = async (req, res, next) => {
             cart.products = [];
 
             await cartsService.updateCart(cid, cart.products);
-
-            req.httpLog();
 
             res.sendSuccess(`All products of Cart with id ${cid} were deleted`);
 
@@ -340,6 +347,8 @@ const deleteCart = async (req, res, next) => {
 const endPurchase = async (req, res, next) => {
 
     // Identificar el carrito del usuario para traer su carrito completo
+
+    req.httpLog();
 
     try {
         const userCart = req.user.cart;
@@ -463,8 +472,6 @@ const endPurchase = async (req, res, next) => {
         if (!result) res.sendIncorrectParameters("User's cart was not updated, something went wrong");
 
         // Devolver el ticket
-        
-        req.httpLog();
 
         res.sendSuccessWithPayload(createdTicket);
 

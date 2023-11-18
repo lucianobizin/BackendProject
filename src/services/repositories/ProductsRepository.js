@@ -51,7 +51,7 @@ export default class ProductsService {
     }
 
     deleteProduct = (pid) => {
-        return this.dao.deleteOne({pid});
+        return this.dao.deleteOne({_id: pid});
     }
 
 }

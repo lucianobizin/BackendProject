@@ -75,7 +75,7 @@ body {
     margin: 0 0 15px;
 }
 
-.product-price, .product-stock, .product-code, .product-category, .product-status {
+.product-price, .product-stock, .product-code, .product-category, .product-owner, .product-status {
     font-size: 14px;
     margin: 0 0 10px;
 }
@@ -85,6 +85,10 @@ body {
 }
 
 .product-category::before {
+    content: "Category: ";
+}
+
+.product-owner::before {
     content: "Category: ";
 }
 

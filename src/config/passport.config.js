@@ -19,7 +19,7 @@ const initializePassport = () => {
 
         if (!firstName || !lastName || !birthDate || !userName) return done(null, false, { message: "Incomplete values" });
 
-        if (email === config.ADMIN_EMAIL) return done(null, false, { message: "An error occurred with the server" });
+        if (email === config.app.ADMIN_EMAIL) return done(null, false, { message: "An error occurred with the server" });
 
         try {
 
@@ -33,7 +33,7 @@ const initializePassport = () => {
             })
 
 
-            if (checkingUser || email === config.ADMIN_EMAIL) return done(null, false, { message: "Email and/or username already used, please, try other options" });
+            if (checkingUser || email === config.app.ADMIN_EMAIL) return done(null, false, { message: "Email and/or username already used, please, try other options" });
 
             const hashedPassword = await createHash(password);
             const newUser = {
@@ -158,7 +158,7 @@ const initializePassport = () => {
         passReqToCallback: true // Every time we have passReqToCallback, passport first parameter is req 
 
     }, async (req, accessToken, refreshToken, profile, done) => {
-
+        
         const { _json } = profile;
 
         const user = await usersService.getUserBy({ email: _json.email });

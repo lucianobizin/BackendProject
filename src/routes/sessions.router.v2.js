@@ -1,5 +1,5 @@
-import passportCall from "../middlewares/passportCall.js";
 import BaseRouter from "./BaseRouter.js";
+import passportCall from "../middlewares/passportCall.js";
 import sessionsController from "../controllers/sessions.controller.js"
 
 class SessionRouter extends BaseRouter {
@@ -11,6 +11,10 @@ class SessionRouter extends BaseRouter {
         this.post("/register", ["NO_AUTH"], passportCall("register", { strategyType: "LOCALS" }), sessionsController.postRegister);
 
         this.post("/login", ["NO_AUTH"], passportCall("login", { strategyType: "LOCALS" }), sessionsController.postLogin);
+
+        this.post("/passwordRestoreRequest", ["PUBLIC"], sessionsController.passwordRestoreRequest);
+
+        this.put("/password-restore", ["PUBLIC"], sessionsController.restorePassword);
 
         // Se presenta ante la app
         this.get("/github", ["NO_AUTH"], passportCall("github", {strategyType: "OAUTH"}), sessionsController.postLoginGithub);

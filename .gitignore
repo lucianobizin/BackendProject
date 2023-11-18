@@ -1,1 +1,9 @@
 /node_modules
+/.env.dev
+/.env.prod
+/backendproject-key.json
+/.dockerignore
+/dockerfile
+.vscode/
+.vscode/launch.json
+/errors.log

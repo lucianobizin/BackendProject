@@ -1,3 +1,70 @@
+En TESTING => artillery quick --count 40 --num 50 "http://localhost:8080/simple" -o simple.json // 40 usuarios que hacen 50 peticiones cada uno
+artillery run config.yml -o sessionflow.json
+artillery report sessionflow.json -o report.html
+
+tasklist /fi "imagename eq node.exe"
+taskkill /pid 5272 -f
+
+FROM node:alpine (puede como ser alpine -menos pesada-) // imagen base del entorno en el que se correrá el servidor
+
+WORKDIR /app // en donde vivirá mi proyecto (una suerte de carpeta)
+
+COPY package*.json ./ (donde voy a copiar los archivo con el término package.json => al directorio raíz)
+
+RUN npm install (que corra npm install)
+
+COPY . . (copia todo lo questá al nivel del dockerfile y guárdalo al nivel de /app)
+
+[se crea .dockerignore ---> node_modules]
+
+EXPOSE 8080 (queda escuchando en 8080)
+
+CMD ["node", "src/app.js"] (ejecuta el comando node y pásale los parámetros src/app.js)
+
+En consola docker build . -t mauricioef1/ejemplodocker:1.0.0 => construye un contenedor a partir de la carpeta en la que estoy ejecutando el comando (.) y le pongo un tag (un nombre -t) nombre de usuario y versión
+
+docker build . -t luchobizin/ejemplodocker:1.0.0
+
+----> para cargar un contenedor
+
+docker run -p 8080:8080 luchobizin/backendprojectcoder:1.0.0
+
+docker image ls (imagen activa)
+
+docker container ls (contenedores activos)
+
+docker export contenedorfeliz (uno que había creado con desktop) -o contendor.tar
+
+$ docker ps -a | grep luchobizin/backendserverdocker:1.0.0 | awk '{print $1}' | xargs docker stop
+
+$ docker rmi luchobizin/dockerbackendproject:1.0.0
+
+docker stop 538d23235f91
+
+Detener el contenedor:
+
+Contenedores en ejecución
+docker ps
+
+bash
+Copy code
+docker stop <ID_o_nombre_del_contenedor>
+Asegúrate de reemplazar <ID_o_nombre_del_contenedor> con el identificador o el nombre del contenedor que encontraste en el paso anterior.
+
+Eliminar el contenedor:
+
+bash
+Copy code
+docker rm <ID_o_nombre_del_contenedor>
+Esto eliminará el contenedor detenido. Nuevamente, reemplaza <ID_o_nombre_del_contenedor> con el identificador o el nombre del contenedor.
+
+Intentar eliminar la imagen nuevamente:
+
+bash
+Copy code
+docker rmi luchobizin/backendserverdocker:1.0.0
+Ahora deberías poder eliminar la imagen sin problemas.
+
 ## TERCERA ENTREGA
 
 ### REVISIÓN DE ENDPOINTS
