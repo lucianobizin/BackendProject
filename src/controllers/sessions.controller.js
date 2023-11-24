@@ -7,23 +7,23 @@ import DMailTemplates from "../constants/DMailTemplates.js";
 import { createHash, isValidPassword } from "../utils.js";
 import MailerService from "../services/mailerService.js";
 
-const getCurrent = async (req, res, next) => {
+// const getCurrent = async (req, res, next) => {
 
-    req.httpLog();
+//     req.httpLog();
 
-    try {
+//     try {
 
-        const formattedUser = UsersDto.formatUser(req.user);
+//         const formattedUser = UsersDto.formatUser(req.user);
 
-        res.sendSuccessWithPayload(formattedUser);
+//         res.sendSuccessWithPayload(formattedUser);
 
-    } catch (error) {
+//     } catch (error) {
 
-        await errorsHandler(error, next);
+//         await errorsHandler(error, next);
 
-    }
+//     }
 
-}
+// }
 
 const postRegister = async (req, res, next) => {
 
@@ -33,18 +33,13 @@ const postRegister = async (req, res, next) => {
 
         const mailService = new MailerService();
 
-        console.log(req.user)
-        console.log(req.user.email)
-
         const result = await mailService.sendMail([req.user.email], DMailTemplates.WELCOME, { user: req.user });
 
     } catch (error) {
 
-        console.log(error)
+        req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
 
-        // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
-
-        // await errorsHandler(error, next);
+        await errorsHandler(error, next);
     }
 
     res.clearCookie("cart");
@@ -291,7 +286,7 @@ const passwordRestoreRequest = async (req, res, next) => {
 
         const user = await usersService.getUserBy({ email: email });
 
-        if (!user) return res.sendBadRequest("User is not registerd in our database");
+        if (!user) return res.sendBadRequest("User is not registered in our database");
 
         const token = jwt.sign({ email }, config.JWT.SECRET, { expiresIn: "1d" });
 
@@ -354,7 +349,7 @@ const restorePassword = async (req, res, next) => {
 
 export default {
 
-    getCurrent,
+    // getCurrent,
     postRegister,
     postLogin,
     postLoginGithub,

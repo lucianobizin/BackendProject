@@ -6,40 +6,40 @@ export default class CartsDao {
     //     return cartModel.find().lean();
     // };
 
-    get = (param) => {
-        return cartModel.find(param).lean();
+    get = async (param) => {
+        return await cartModel.find(param).lean();
     };
 
     // getCartById = (params) => {
     //     return cartModel.findOne(params).lean();
     // };
 
-    getBy = (params) => {
-        return cartModel.findOne(params).lean();
+    getBy = async (params) => {
+        return await cartModel.findOne(params).lean();
     };
 
     // createCart = () => {
     //     return cartModel.create({cart:[{products:{}, quantity:0}]});
     // };
 
-    create = (param) => {
-        return cartModel.create(param);
+    create = async (param) => {
+        return await cartModel.create(param);
     };
 
     // updateCart = (cid, products) => {
     //     return cartModel.updateOne({ _id: cid }, { $set: { products : products } });
     // };
 
-    update = (searchParam, updateParam) => {
-        return cartModel.updateOne(searchParam, updateParam);
+    update = async (searchParam, updateParam) => {
+        return await cartModel.updateOne(searchParam, updateParam);
     };
 
     // deleteCart = (cid) => {
     //     return cartModel.deleteOne({ _id: cid });
     // };
 
-    delete = (param) => {
-        return cartModel.deleteOne(param);
+    delete = async (param) => {
+        return await cartModel.deleteOne(param);
     };
 
 };

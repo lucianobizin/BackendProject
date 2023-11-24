@@ -151,7 +151,7 @@ const getCartById = async (req, res, next) => {
 
     try {
 
-        const cart = await cartsService.getCartById({ _id: req.cid });
+        const cart = await cartsService.getCartById(req.cid);
 
         if (!cart) return res.sendIncorrectParameters("Cart not found");
 

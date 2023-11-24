@@ -1,0 +1,277 @@
+paths:
+
+  /register:
+    get:
+      summary: Register page
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the Register page.
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /login:
+    get:
+      summary: Login page
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the Login page.
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /profile:
+    get:
+      summary: Profile page
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the Profile page.
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /products:
+    get:
+      summary: Products page (Home page)
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the Home page with all products (by default 10 without using the query param "limit").
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+
+  /product/{pid}:
+    get:  
+      summary: Retrieve one product
+      tags:
+        - views
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: product id to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success response. Renders the product.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request (introduce a correct parameter pid)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /carts/{cid}:
+    get:  
+      summary: Retrieve one cart (admin can retrieves all of them, but each user only yours)
+      tags:
+        - views
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: cart id to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success response. Renders the cart.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request (introduce a correct parameter cid)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /password-restoretore:
+    get:  
+      summary: Page to create a new password once you received an email confimation
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the page to restore user's password.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request (introduce a correct parameter cid)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+                    
+  /loggerTester:
+    get:  
+      summary: Page to test loggers
+      tags:
+        - views
+      responses:
+        '200':
+          type: object
+          description: Success response. Renders an example of each type of log.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request (introduce a correct parameter cid)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message

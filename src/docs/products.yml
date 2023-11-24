@@ -1,0 +1,327 @@
+paths:
+
+  /api/products:
+    
+    get:
+      summary: Retrieve all products from the database.
+      tags:
+        - products
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  payload:
+                    $ref: "#components/schemas/product"
+        '400':
+          description: Incorrect param "room".
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+    
+    post:
+      summary: Add a product to the database
+      tags:
+        - products
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: message success (includes added product id)
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /api/products/mockingproducts:
+    get:
+      summary: Retrieve mocking product for testing.
+      tags:
+        - products
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  payload:
+                    $ref: "#components/schemas/product"
+        '400':
+          description: Incorrect param "room".
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /api/products/{pid}:
+    put:
+      summary: update a product (admin all products/ premium users only theirs) 
+      tags:
+        - products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: product to update to cart
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: success message (includes id of the updated product)
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+    delete:
+      summary: delete a product (admin all products/ premium users only theirs) 
+      tags:
+        - products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: product to update to cart
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: success message (includes id of the deleted product)
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+components:
+  schemas:
+    product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Unique identifier for the product.
+        username:
+          type: string
+          description: User who created the product.
+        email:
+          type: string
+          description: Email of the user who created the product.
+        body:
+          type: string
+          description: Body or description of the product.
+        title:
+          type: string
+          description: Title of the product.
+        description:
+          type: string
+          description: Description of the product.
+        price:
+          type: number
+          description: Price of the product.
+        thumbnail:
+          type: array
+          items:
+            type: string
+          description: Array of thumbnail URLs for the product.
+        stock:
+          type: number
+          description: Stock quantity of the product.
+        code:
+          type: string
+          description: Product code.
+        category:
+          type: string
+          description: Category of the product.
+        status:
+          type: boolean
+          description: Status of the product (true for active, false for inactive).
+        owner:
+          type: string
+          description: Owner of the product.

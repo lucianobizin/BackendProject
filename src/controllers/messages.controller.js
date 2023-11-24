@@ -9,6 +9,8 @@ const getMessages = async (req, res, next) => {
 
         const { room } = req.params;
 
+        if(!room) res.sendIncorrectParameters("Introduce a corrrect room")
+
         const date = new Date();
 
         date.setMonth(date.getMonth() - 1);
@@ -19,13 +21,11 @@ const getMessages = async (req, res, next) => {
 
         };
 
-        if (room) {
-
-            searchFilter.room = room;
-            
-        }
-
+        searchFilter.room = room;
+        
         const messages = await messagesService.getMessages(searchFilter);
+
+        if(!messages) res.sendBadRequest("There was an error when retrieving messages")
 
         res.sendSuccessWithPayload(messages);
 

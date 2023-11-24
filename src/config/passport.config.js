@@ -47,15 +47,35 @@ const initializePassport = () => {
 
             }
 
-            let cart;
+            let cart = "";
 
             if (req.cookies["cart"]) {
 
                 cart = req.cookies["cart"];
 
+                console.log("cart", cart)
+
+                cart = await cartsService.getCartById(cart)
+
+                console.log("getCartById", cart)
+
+                if(cart?.expirationTime){
+
+                    const confirmation = await cartsService.confirmCart(cart._id)
+
+                    console.log("Confirmation", confirmation)
+                }
+
+                cart = cart._id
+
             } else {
 
                 cartResult = await cartsService.createCart();
+
+                if(cartResult?.expirationTime){
+
+                    await cartsService.confirmCart(cartResult._id)
+                }
 
                 cart = cartResult._id;
 
@@ -136,6 +156,41 @@ const initializePassport = () => {
 
             }
 
+            let cart;
+
+            if (req.cookies["cart"]) {
+
+                cart = req.cookies["cart"];
+
+                cart = await cartsService.getCartById(cart)
+
+                if(cart){
+
+                    if(cart?.expiryDate) {
+
+                        await cartsService.confirmCart(cart._id)
+            
+                    };
+
+                    cart = cart._id
+
+                }
+
+            } else {
+
+                cartResult = await cartsService.createCart();
+
+                if(cartResult?.expirationTime){
+
+                    await cartsService.confirmCart(cartResult._id);
+                };
+
+                cart = cartResult._id;
+
+            }
+
+            newUser.cart = cart
+
             const result = await usersService.createUser(newUser);
 
             done(null, result);
@@ -184,9 +239,27 @@ const initializePassport = () => {
 
                 cart = req.cookies["cart"];
 
+                cart = await cartsService.getCartById(cart)
+
+                if(cart){
+
+                    if(cart?.expirationTime){
+
+                        await cartsService.confirmCart(cart._id)
+                    }
+
+                    cart = cart._id
+
+                }
+
             } else {
 
                 cartResult = await cartsService.createCart();
+
+                if(cart?.expirationTime){
+
+                    await cartsService.confirmCart(cartResult._id)
+                }
 
                 cart = cartResult._id;
 

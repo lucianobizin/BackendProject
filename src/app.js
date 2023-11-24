@@ -6,6 +6,8 @@ import Handlebars from "express-handlebars";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import cluster from "cluster"
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUIExpress from "swagger-ui-express";
 
 import { Server } from "socket.io";
 
@@ -18,7 +20,7 @@ import attachLogger from "./middlewares/attachLogger.js";
 import productsRouter from "./routes/products.router.js";
 import viewsRouter from "./routes/views.router.js";
 import cartsRouter from "./routes/carts.router.js";
-import SessionsRouter from "./routes/sessions.router.v2.js";
+import SessionsRouter from "./routes/sessions.router.js";
 import messageRouter from "./routes/message.router.js";
 import usersRouter from "./routes/users.router.js";
 
@@ -59,6 +61,20 @@ if (cluster.isPrimary) {
     }));
 
     const connection = mongoose.connect(config.mongo.URL);
+
+    const swaggerSpecOptions = {
+        definition: {
+            openapi:"3.0.1",
+            info: {
+                title: 'AI courses',
+                description: "### IA course 4 all",
+            }
+        },
+        apis: [`${__dirname}/docs/**/*.yml`] // docs contiene carpetas con archivos yml
+    };
+
+    const swaggerSpec = swaggerJSDoc(swaggerSpecOptions);
+    app.use("/apidocs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerSpec)); // Configure view using swaggerSpec
 
     app.engine("handlebars", Handlebars.engine());
     app.set("views", `${__dirname}/views`);

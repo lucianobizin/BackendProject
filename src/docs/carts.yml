@@ -1,0 +1,588 @@
+paths:
+
+  /api/carts:
+    get:
+      summary: Retrieve all carts (only executable by admin).
+      tags:
+        - carts
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  payload:
+                    type: array
+                    items:
+                      $ref: "#components/schemas/cart"
+        '400':
+          description: Incorrect query param "limit" (must be an integer number greater than 0). If no query param limit is passed, limit is equal to 10 by default.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /api/carts/{cid}:
+    get:  
+      summary: Retrieve one cart
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: id of the cart to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "success"
+                  payload:
+                    $ref: "#components/schemas/cart"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+    put:
+      summary: Update a cart
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: cart in which add the selected product
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+          '500':
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Request state "error"
+                    message:
+                      type: string
+                      description: Error message    
+    delete:
+      summary: Delete one cart
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Cart to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Add a product to the user's cart
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: cart in which add the selected product
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: product to add to cart
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+    put:
+      summary: Add a product to a cart no related to a user. This allows users to add products to a cart specifically assigned to them. These carts are created with an expiration time that is erased once the user registers himself/herself or logs in by Google or Github. 
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: cart in which update the selected product
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: product to update to cart
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+          '500':
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Request state "error"
+                    message:
+                      type: string
+                      description: Error message
+    delete:
+      summary: delete products from user's cart 
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: cart in which delete the selected product
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: product to delete from cart
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+          '500':
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Request state "error"
+                    message:
+                      type: string
+                      description: Error message    
+  
+  /api/carts/{cid}/purchase:
+    post:
+      summary: End purchase
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: unique identifier of cart to purchase
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "success"
+                  payload:
+                    $ref: "#components/schemas/ticket"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /api/carts/products/{pid}:
+    put:
+      summary: Update products in user's cart
+      tags:
+        - carts
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: unique identifier of the product updated
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  message:
+                    type: string
+                    description: sucess message
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '403':
+          description: unauthorised
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+          '500':
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Request state "error"
+                    message:
+                      type: string
+                      description: Error message    
+
+components:
+  schemas:
+    cart:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: cart unique identifier.
+        products:
+          type: array
+          description: list of products in the cart.
+          items:
+            properties:
+              pid:
+                type: string
+                description: product unique identifier.
+              quantity:
+                type: integer
+                description: quantity
+        expirationTime:
+          type: string
+          format: date-time
+          description: when a cart is created has this property to avoid overloading database with empty carts. Once the user registers or login in by Github or Google, this property is deleted.
+    ticket:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ticket unique identifier.
+        code:
+          type: string
+          description: ticket code
+        purchase_datetime:
+          type: string
+          format: date-time
+          description: when ticket created
+        amount:
+          type: number
+          description: purchase total amount
+        purchaser:
+          type: string
+          description: user's email

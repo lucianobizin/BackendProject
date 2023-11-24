@@ -1,0 +1,70 @@
+paths:
+  /api/messages/{room}:
+    get:
+      summary: Retrieve messages from the previous month.
+      tags:
+        - messages
+      parameters:
+        - in: path
+          name: room
+          required: true
+          description: room to chat
+          schema:
+            type: string
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  payload:
+                    $ref: "#components/schemas/message"
+        '400':
+          description: Incorrect param "room".
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+components:
+  schemas:
+    message:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: message unique identifier.
+        username:
+          type: string
+          description: user who wrote the message
+        email:
+          type: string
+          description: email of who wrote the message
+        body:
+          type: string
+          description: body of the message

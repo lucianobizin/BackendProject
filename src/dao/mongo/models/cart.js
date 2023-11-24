@@ -20,8 +20,16 @@ const productSchema = new mongoose.Schema({
 const schema = new mongoose.Schema({
 
     products: [productSchema],
+    expirationTime: {
+        type: Date,
+        expires: '2d',
+        default: () => new Date(Date.now() + 2 * 24 * 60 * 60 * 1000) //  después de 48 horas
+    },
 
 }, { timestamps: true });
+
+// Creating a TTL Index for expirationTime
+schema.index({ expirationTime: 1 }, { expireAfterSeconds: 0 });
 
 schema.pre(["find", "findOne"], function () {
     this.populate("products.pid")

@@ -19,7 +19,7 @@ const getCarts = async (req, res, next) => { // Se agregó el next
 
             } else {
 
-                res.sendIncorrectParameters("Invalid query");
+                res.sendIncorrectParameters("Invalid query param");
 
             }
         } else {
@@ -44,13 +44,15 @@ const getCarts = async (req, res, next) => { // Se agregó el next
 
 const getCart = async (req, res, next) => {
 
-    const cid = req.params.cid;
+    const cid = req.cid;
 
     if (cid) {
 
         try {
 
-            const cart = await cartsService.getCartById({ _id: cid })
+            const cart = await cartsService.getCartById(cid)
+
+            if(req.cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
 
             req.httpLog();
 
@@ -70,30 +72,29 @@ const getCart = async (req, res, next) => {
     }
 }
 
-const postNewCart = async (req, res, next) => {
+// // ¿Se usa para algo?
+// const postNewCart = async (req, res, next) => {
 
-    try {
+//     try {
 
-        const result = await cartsService.createCart();
+//         if (result) {
 
-        if (result) {
+//             req.httpLog();
 
-            req.httpLog();
+//             return res.sendSuccessWithPayload(result._id);
 
-            return res.sendSuccessWithPayload(result._id);
+//         } else {
 
-        } else {
+//             return res.sendIncorrectParameters("Something goes wrong");
+//         }
 
-            return res.sendIncorrectParameters("Something goes wrong");
-        }
+//     } catch (error) {
 
-    } catch (error) {
+//         await errorsHandler(error, next);
+//         // res.sendInternalError(`Error when creating a cart carts: ${e}`);
+//     }
 
-        await errorsHandler(error, next);
-        // res.sendInternalError(`Error when creating a cart carts: ${e}`);
-    }
-
-}
+// }
 
 const postCart = async (req, res, next) => {
 
@@ -103,13 +104,13 @@ const postCart = async (req, res, next) => {
     const pid = req.pid
     const quantity = req.quantity
 
-    if (cid && pid) {
+    if (cid && pid && quantity) {
 
         try {
 
-            if (!quantity) return res.sendIncorrectParameters("Quantity parameter needed");
-
             const product = await productsService.getProductsById(pid);
+
+            if (!product) return res.sendIncorrectParameters(`No product with id ${pid}`);
 
             if(product.owner === req.user.email) {
 
@@ -119,11 +120,12 @@ const postCart = async (req, res, next) => {
 
             } 
 
-            if (!product) return res.sendIncorrectParameters(`No product with id ${pid}`);
-
-            const cart = await cartsService.getCartById({ _id: cid });
+            const cart = await cartsService.getCartById(cid);
 
             if (!cart) return res.sendIncorrectParameters(`No cart with id ${cid}`);
+
+            // To avoid A01:2021 - Broken Access Control
+            if(req.cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
 
             const existingProductIndex = cart.products.findIndex(prod => prod.pid._id.toString() === product._id.toString());
 
@@ -134,6 +136,11 @@ const postCart = async (req, res, next) => {
             } else {
 
                 cart.products.push({ pid: product._id, quantity: quantity });
+            }
+
+            if(cart?.expirationTime){
+
+                await cartsService.confirmCart(cid)
             }
 
             await cartsService.updateCart(cid, cart.products);
@@ -157,13 +164,16 @@ const putCart = async (req, res, next) => {
 
     req.httpLog();
 
-    const cid = req.params.cid;
+    const cid = req.cid;
 
     const products = req.body;
 
     try {
 
-        let cart = await cartsService.getCartById({ _id: cid });
+        let cart = await cartsService.getCartById(cid);
+
+        // To avoid A01:2021 - Broken Access Control
+        if(req.cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
 
         if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
 
@@ -191,9 +201,15 @@ const putCartNotLoggedIn = async (req, res) => {
 
         try {
 
-            let cart = await cartsService.getCartById({ _id: cid });
+            let cart = await cartsService.getCartById(cid);
 
             if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
+
+            // To avoid A01:2021 - Broken Access Control
+            if(!req.user && cart._id !==req.cookies.cart) return res.sendUnauthorized("Illegal action")
+
+            // To avoid A01:2021 - Broken Access Control
+            if(req.cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
 
             const productToUpdate = cart.products.find(prod => prod.pid._id.toString() === pid.toString())
 
@@ -201,7 +217,7 @@ const putCartNotLoggedIn = async (req, res) => {
 
             productToUpdate.quantity = quantity
 
-            await cartsService.updateCart(req.user.library, { cart: cart.products });
+            await cartsService.updateCart(req.user.cart, { cart: cart.products });
 
             return res.sendSuccess(`Product with ID ${pid} in cart ${cid} has been updated with quantity ${quantity}`);
 
@@ -226,17 +242,22 @@ const putUpdateProducts = async (req, res, next) => {
 
     req.httpLog();
 
-    const pid = req.params.pid;
+    const pid = req.pid;
 
-    const { quantity } = req.body;
+    const quantity = req.quantity;
+
+    const cid = req.cid;
 
     if (cid && pid && quantity) {
 
         try {
 
-            let cart = await cartsService.getCartById({ _id: req.user.cart });
+            let cart = await cartsService.getCartById(req.user.cart);
 
             if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
+
+            // To avoid A01:2021 - Broken Access Control
+            if(cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
 
             const productToUpdate = cart.products.find(prod => prod.pid._id.toString() === pid.toString());
 
@@ -270,23 +291,32 @@ const deleteProductsFromCart = async (req, res, next) => {
 
     req.httpLog();
 
-    const cid = req.params.cid;
+    const cid = req.cid;
 
-    const pid = req.params.pid;
+    const pid = req.pid;
 
     if (cid && pid) {
 
         try {
 
-            let cart = await cartsService.getCartById({ _id: cid });
+            let cart = await cartsService.getCartById(cid);
 
             if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
+
+            // To avoid A01:2021 - Broken Access Control
+            if(cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action");
 
             const productIndex = cart.products.findIndex(product => product.pid._id.toString() === pid.toString());
 
             if (productIndex === -1) return res.sendIncorrectParameters(`Product with ID ${pid} does not exist in the cart`);
 
             cart.products.splice(productIndex, 1);
+
+            // if(cart?.expiryDate) {
+
+            //     cartsService.deleteExpiryDate(cid)
+
+            // };
 
             await cartsService.updateCart(cid, cart.products)
 
@@ -318,7 +348,7 @@ const deleteCart = async (req, res, next) => {
 
         try {
 
-            const cart = await cartsService.getCartById({ _id: cid });
+            const cart = await cartsService.getCartById(cid);
 
             if (!cart) return res.sendIncorrectParameters(`Cart with id ${cid} does not exist`);
 
@@ -357,11 +387,18 @@ const endPurchase = async (req, res, next) => {
             return res.sendIncorrectParameters("There is no cart associated with this user");
         }
 
-        const cart = await cartsService.getCartById({ _id: userCart });
+        const cart = await cartsService.getCartById(userCart);
 
         if (!cart) {
             return res.sendIncorrectParameters("Cart does not exist");
         }
+
+        // ¿Puede suceder este caso? ---> parece que solo en el registro
+        // if(cart?.expiryDate) {
+
+        //     cartsService.deleteExpiryDate(cid)
+
+        // };
 
         // Obtener los IDs y cantidades de productos del carrito del usuario
         let productsToCheck = cart.products.map(product => ({
@@ -486,7 +523,7 @@ const endPurchase = async (req, res, next) => {
 export default {
     getCarts,
     getCart,
-    postNewCart,
+    // postNewCart,
     postCart,
     putCart,
     putCartNotLoggedIn,
