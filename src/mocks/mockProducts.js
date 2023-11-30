@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker/locale/af_ZA"
 
-export const generateProducts = () => {
+export const generateUsers = () => {
 
     const roles = ["user", "userpremium", "admin"];
 

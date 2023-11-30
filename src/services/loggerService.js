@@ -71,6 +71,33 @@ export default class LoggerService {
 
             }
 
+            case "test": {
+
+                return winston.createLogger({
+
+                    levels: this.options.levels,
+
+                    transports: [
+
+                        new winston.transports.Console({
+
+                            level:"http"   	// El desafío pedía info pero siguiendo al profe y modifiqué los niveles de logueo
+
+                        }),
+                
+                        new winston.transports.File({
+
+                            levels: "error",
+
+                            filename: "./errors.log" 
+
+                        })
+
+                    ]
+                })
+
+            }
+
         }
 
     }

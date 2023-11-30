@@ -8,7 +8,7 @@
     "start": "node src/app.js",
     "dev": "node src/app.js",
     "prod": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/test/products/api/Products.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -44,6 +44,9 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   }
 }

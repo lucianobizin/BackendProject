@@ -1,6 +1,6 @@
 import CloudStorageService from "../services/cloudStorageService.js";
 import { productsService } from "../services/index.js";
-import { generateProducts } from "../mocks/mockProducts.js";
+import { generateUsers } from "../mocks/mockProducts.js";
 import { errorsHandler } from "./error.controller.js";
 
 const getProducts = async (req, res, next) => {
@@ -33,7 +33,7 @@ const getProducts = async (req, res, next) => {
 
 };
 
-const getMockProducts = async (req, res, next) => {
+const getMockUsers = async (req, res, next) => {
 
     req.httpLog();
 
@@ -43,7 +43,7 @@ const getMockProducts = async (req, res, next) => {
 
         for (let i = 0; i < 100; i++) {
 
-            const mockProducts = generateProducts();
+            const mockProducts = generateUsers();
 
             mockProductsList.push(mockProducts)
 
@@ -106,6 +106,10 @@ const postProducts = async (req, res, next) => {
             }
 
         }
+
+        const newProductCheckingCode = await productsService.getProductsByCode(newProduct.code);
+
+        if(newProductCheckingCode) return res.sendIncorrectParameters("Incorrect values");
 
         const googleStorageService = new CloudStorageService();
 
@@ -228,7 +232,7 @@ const deleteProducts = async (req, res, next) => {
 
 export default {
     getProducts,
-    getMockProducts,
+    getMockUsers,
     postProducts,
     putProducts,
     deleteProducts

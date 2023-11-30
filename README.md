@@ -1,3 +1,26 @@
+import mongoose from "mongoose"
+import UserDao from "../.."
+import {strict as ssert } from "assert"
+
+// Carpeta Test=> Users/api y dao / pets.test.js
+
+mongoose.connect("string connection")
+
+describe("Tests unitarios para....", function(){
+    this.timeout(10000)
+    before (function(){
+        this.usersDao = new UsersDao();
+    })
+
+    beforeEach(function(){
+        mongoose.connection.collections.users.drop()
+    })
+    it("El dao debe devolver los usuarios en formato de arreglo", async function(){
+
+    })
+})
+
+
 En TESTING => artillery quick --count 40 --num 50 "http://localhost:8080/simple" -o simple.json // 40 usuarios que hacen 50 peticiones cada uno
 artillery run config.yml -o sessionflow.json
 artillery report sessionflow.json -o report.html

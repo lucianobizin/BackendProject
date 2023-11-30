@@ -294,3 +294,63 @@
 {"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 19:26:11"}
 {"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/login - 19:26:16"}
 {"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 19:26:16"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 19:12:53"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 19:33:14"}
+{"level":"http","message":"[HTTP] ---> email: 123@corre.com - POST - ::1 - http://localhost:8080/api/sessions/register - 19:50:49"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 19:51:18"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 19:51:47"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 19:52:01"}
+{"level":"http","message":"[HTTP] ---> email: pepesanchez@correo.com - POST - ::1 - http://localhost:8080/api/sessions/register - 19:52:39"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 19:53:14"}
+{"level":"http","message":"[HTTP] ---> email: pepesanchez@correo.com - POST - ::1 - http://localhost:8080/api/sessions/login - 19:53:22"}
+{"level":"http","message":"[HTTP] ---> email: pepesanchez@correo.com - GET - ::1 - http://localhost:8080/products - 19:53:22"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:01:29"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:38:21"}
+{"level":"http","message":"[HTTP] ---> email: pepe.doe4@example.com - POST - ::1 - http://localhost:8080/api/sessions/register - 20:38:22"}
+{"level":"error","message":"[ERROR] ---> Email to pepe.doe4@example.com could not be sent - 20:38:36"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:39:02"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:40:06"}
+{"level":"http","message":"[HTTP] ---> email: pepe.doe5@example.com - POST - ::1 - http://localhost:8080/api/sessions/register - 20:40:07"}
+{"level":"error","message":"[ERROR] ---> Email to pepe.doe5@example.com could not be sent - 20:40:18"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:46:59"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:48:26"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 20:48:26"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 20:51:08"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmaila.com - POST - ::1 - http://localhost:8080/api/sessions/register - 20:51:09"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 21:57:21"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 22:34:04"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 22:37:12"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 22:38:24"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 22:40:03"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:00:18"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:02:03"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:04:13"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:04:13"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:05:43"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:05:43"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:07:19"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:07:19"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:08:27"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:08:28"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:10:30"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:10:30"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:11:35"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:11:35"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:18:37"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:18:37"}
+{"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:19:33"}
+{"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
+{"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:19:33"}

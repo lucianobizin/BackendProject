@@ -26,6 +26,11 @@ export default class ProductsService {
         return this.dao.getBy(pid);
     }
 
+    getProductsByCode = (code) => {
+
+        return this.dao.getBy({ code: code });
+    }
+
     // createProduct = (product) => {
     //     return this.dao.createProduct(product);
     // }
