@@ -3,6 +3,17 @@ import mongoose from "mongoose";
 
 const collection = "Users";
 
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    reference: {
+        type: String,
+        required: true
+    },
+}, { _id: false });
+
 const schema = new mongoose.Schema(
     
     {
@@ -50,8 +61,16 @@ const schema = new mongoose.Schema(
     cart:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "cart",
-    }
+    },
 
+    documents:[userSchema],
+
+    last_connection:{
+        type:{
+            type: Date,
+            default: () => new Date(Date.now()) //  después de 48 horas
+        }
+    }
 
 }, {timestamps: true});
 

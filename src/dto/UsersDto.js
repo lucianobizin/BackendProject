@@ -1,16 +1,30 @@
 export default class UsersDto {
 
-    constructor(user) {
+    static getTokenDTOFrom = (user) => {
 
-        this.email = user.email,
-        this.userName = user.userName,
-        this.role = user.role,
-        this.cart = user.cart
+        if (user.email !== "adminCoder@coder.com") {
+
+            return {
+
+                _id: user._id,
+                email: user.email,
+                userName: user.userName,
+                role: user.role,
+                cart: user.cart,
+                last_connection: user.last_connection
+
+            }
+
+        } else if (user.email === "adminCoder@coder.com") {
+
+            return {
+
+                userName: "admin",
+                role: "admin"
+
+            }
+            
+        }
 
     }
-
-    static formatUser(user) {
-        return new UsersDto(user);
-    }
-
 }

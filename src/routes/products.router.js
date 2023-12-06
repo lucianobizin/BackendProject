@@ -8,8 +8,6 @@ class ProductsRouter extends BaseRouter{
 
         this.get("/", ["PUBLIC"], productsController.getProducts);
 
-        this.get("/mockingproducts", ["AUTH"], productsController.getMockUsers);
-
         this.post("/", ["PREMIUM", "ADMIN"], uploader.array("images"), productsController.postProducts);
 
         this.put("/:pid", ["PREMIUM", "ADMIN"], productsController.putProducts);

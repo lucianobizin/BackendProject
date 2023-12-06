@@ -1,0 +1,41 @@
+<div class="main-container">
+
+    <h1>Create a New Product</h1>
+
+    <form id="newProductForm" method="post" enctype="multipart/form-data">
+        <!-- Title -->
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <!-- Description -->
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <!-- Price -->
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <!-- Thumbnail (Image Upload) -->
+        <label for="images">Images:</label>
+        <input type="file" id="images" name="images" accept="image/*" multiple>
+
+        <!-- Stock -->
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
+
+        <!-- Code -->
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" required>
+
+        <!-- Category -->
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
+
+        <!-- Submit Button -->
+        <button type="submit" value="submit">Create Product</button>
+
+    </form>
+
+</div>
+
+<script src="./js/productCreator.js"></script>

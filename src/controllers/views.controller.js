@@ -3,6 +3,7 @@ import { productsService, cartsService } from "../services/index.js";
 import { errorsHandler } from "./error.controller.js";
 import jwt from "jsonwebtoken";
 import config from "../config/config.js";
+import UsersDto from "../dto/UsersDto.js";
 
 const getRegisterPage = async (req, res, next) => {
 
@@ -10,7 +11,11 @@ const getRegisterPage = async (req, res, next) => {
 
     try {
 
-        res.renderPage('Register');
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/register.css`;
+
+        res.renderPage('Register', {
+            css
+        });
 
     } catch (error) {
 
@@ -41,9 +46,9 @@ const getProfilePage = async (req, res, next) => {
 
     try {
 
-        const user = req.user;
+        const user = UsersDto.getTokenDTOFrom(req.user);
 
-        res.renderPage("Profile", { user });
+        res.renderPage("Profile", { css: "./css/profile.css", user });
 
     } catch (error) {
 
@@ -92,15 +97,15 @@ const getRenderedProducts = async (req, res, next) => {
 
         const { totalPages, prevPage, nextPage, hasPrevPage, hasNextPage } = paginationProducts;
 
-        const prevLink = hasPrevPage ? `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/products/?page=${prevPage}` : null;
+        const prevLink = hasPrevPage ? `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/products/?page=${prevPage}` : null;
 
-        const nextLink = hasNextPage ? `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/products/?page=${nextPage}` : null;
+        const nextLink = hasNextPage ? `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/products/?page=${nextPage}` : null;
 
         // Por passportCall y passport.config => req.user = null || user
         const user = req.user;
 
         res.renderPage("Home", {
-            css: `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/css/home.css`,
+            css: `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/home.css`,
             products,
             currentPage,
             hasPrevPage,
@@ -130,7 +135,7 @@ const getProductInfo = async (req, res, next) => {
 
         const product = await productsService.getProductsById(req.pid);
 
-        const css = `${req.protocol}://${req.hostname}:${process.env.PORT || 8080}/css/product.css`
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/product.css`
 
         res.renderPage("Product", {
             css,
@@ -249,6 +254,48 @@ const getComplex = async (req, res) => {
 
 }
 
+const getProductCreator = async (req, res, next) => {
+
+    req.httpLog();
+
+    try {
+
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/product-creator.css`
+
+        res.renderPage("ProductCreator", {
+            css,
+        })
+
+    } catch (error) {
+
+        await errorsHandler(error, next);
+
+    }
+
+}
+
+const getUserUpgrade = async (req, res, next) => {
+
+    req.httpLog();
+
+    try {
+
+        if(req.user.role !== "premium") return res.sendForbidden("Access not allowed");
+
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/user-upgrade.css`;
+
+        res.renderPage("UserUpgrade", {
+            css,
+        })
+
+    } catch (error) {
+
+        await errorsHandler(error, next);
+
+    }
+
+}
+
 export default {
 
     getRegisterPage,
@@ -261,6 +308,8 @@ export default {
     getDoesNotExistPage,
     getLoggers,
     getSimple,
-    getComplex
+    getComplex,
+    getProductCreator,
+    getUserUpgrade
 
 }

@@ -3,12 +3,12 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    color: #333; /* Color de texto principal */
+    color: #333;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -56,12 +56,13 @@ body {
 
 .product img {
     max-width: 100%;
-    height: auto;
+    height: 300px; 
+    object-fit: cover;
     border-radius: 10px;
 }
 
 .product h1 {
-    font-size: 24px;
+    font-size: 20px;
     margin: 15px 0;
     color: #333;
 }
@@ -127,25 +128,19 @@ body {
     color: #fff;
 }
 
-/* Estilos adicionales según tus preferencias */
-
-/* Animación suave de desplazamiento */
 html {
     scroll-behavior: smooth;
 }
 
-/* Efecto de transición en el contenedor principal */
 .container {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Icono de carrito o cualquier otro icono relevante */
 .icon-cart {
     font-size: 24px;
     color: #0077b6;
 }
 
-/* Estilos de enlaces para una mejor experiencia de usuario */
 a {
     text-decoration: none;
     color: #0077b6;

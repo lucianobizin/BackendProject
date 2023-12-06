@@ -17,8 +17,10 @@ class ViewsRouter extends BaseRouter {
         this.get('/profile', ["AUTH"], viewsController.getProfilePage);
         this.get("/products", ["PUBLIC"], viewsController.getRenderedProducts);
         this.get("/product/:pid", ["PUBLIC"], viewsController.getProductInfo)
+        this.get("/product-creator", ["PREMIUM", "ADMIN"], viewsController.getProductCreator);
         this.get("/carts/:cid", ["AUTH"], viewsController.getCartById);
         this.get("/password-restore", ["PUBLIC"], viewsController.passwordRestore)
+        this.get("/user-upgrade", ["PREMIUM", "ADMIN"], viewsController.getUserUpgrade)
 
         this.get("/loggerTester", ["PUBLIC"], viewsController.getLoggers)
         this.get("/simple", ["PUBLIC"], viewsController.getSimple);

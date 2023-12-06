@@ -354,3 +354,27 @@
 {"level":"http","message":"[HTTP] ---> email: adminCoder@coder.com - POST - ::1 - http://localhost:8080/api/sessions/login - 0:19:33"}
 {"level":"warning","message":"[WARNING] ---> Admin connected: some critical processes might be permanently changed"}
 {"level":"http","message":"[HTTP] ---> email: null - POST - ::1 - http://localhost:8080/api/products - 0:19:33"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:03:16"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 16:03:21"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 16:03:38"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:03:42"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/register - 16:05:47"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/register - 16:05:59"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:06:04"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/login - 16:06:29"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 16:06:30"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::ffff:127.0.0.1 - http://localhost:8080/profile - 16:08:21"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::ffff:127.0.0.1 - http://localhost:8080/profile - 16:08:22"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::ffff:127.0.0.1 - http://localhost:8080/api/sessions/logout - 16:08:25"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::ffff:127.0.0.1 - http://localhost:8080/products - 16:08:25"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/login - 16:08:34"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/login - 16:08:36"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/products - 16:08:37"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - GET - ::1 - http://localhost:8080/profile - 16:11:06"}
+{"level":"warning","message":"[WARNING] ---> No authorization policy matched... may it be a vulnerable entrance?"}
+{"level":"http","message":"[HTTP] ---> email: lucianobizin@gmail.com - POST - ::1 - http://localhost:8080/api/sessions/logout - 16:11:09"}
+{"level":"http","message":"[HTTP] ---> email: null - GET - ::1 - http://localhost:8080/products - 16:11:09"}

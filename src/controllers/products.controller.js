@@ -33,33 +33,6 @@ const getProducts = async (req, res, next) => {
 
 };
 
-const getMockUsers = async (req, res, next) => {
-
-    req.httpLog();
-
-    try {
-
-        const mockProductsList = [];
-
-        for (let i = 0; i < 100; i++) {
-
-            const mockProducts = generateUsers();
-
-            mockProductsList.push(mockProducts)
-
-        }
-
-        res.sendSuccessWithPayload(mockProductsList);
-
-    }
-    catch (error) {
-
-        await errorsHandler(error, next);
-
-    }
-
-};
-
 const postProducts = async (req, res, next) => {
 
     req.httpLog();
@@ -117,7 +90,7 @@ const postProducts = async (req, res, next) => {
 
         for (const file of req.files) {
 
-            const url = await googleStorageService.uploadFileToCloudStorage(file);
+            const url = await googleStorageService.uploadFileToCloudStorage("products", "product_img", file);
 
             images.push(url);
 
@@ -232,7 +205,6 @@ const deleteProducts = async (req, res, next) => {
 
 export default {
     getProducts,
-    getMockUsers,
     postProducts,
     putProducts,
     deleteProducts

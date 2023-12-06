@@ -1,0 +1,70 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    margin: 5%;
+}
+
+.card {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenté la intensidad de la sombra */
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform: rotateX(5deg) rotateY(5deg);
+    transition: transform 0.5s;
+}
+
+.card:hover {
+    transform: rotateX(0) rotateY(0);
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    margin: 10px 0;
+    color: #555;
+}
+
+#userId {
+    font-weight: bold;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        margin: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}

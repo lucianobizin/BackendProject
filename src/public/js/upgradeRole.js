@@ -13,6 +13,6 @@ upgradetButton.addEventListener("click", async (event) => {
     const result = await response.json();
     if (result.status === "success") {
 
-        return window.location.replace('/login')
+        return window.location.replace('/user-upgrade')
     }
 });

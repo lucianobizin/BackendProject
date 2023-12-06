@@ -25,4 +25,12 @@ export default class UsersRepository {
         return this.dao.update({ _id: uid }, { $set: {role: roleToUpdate} });
     }
 
+    last_connectionUpdate(uid, last_connection_){
+        return this.dao.update({ _id: uid }, { $set: {last_connection: last_connection_} })
+    }
+
+    updateUser(uid, newDocument){
+        return this.dao.update({ _id: uid }, { $set: {documents: newDocument} })
+    }
+
 }

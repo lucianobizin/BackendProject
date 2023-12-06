@@ -6,7 +6,7 @@ class SessionRouter extends BaseRouter {
 
     init() {
 
-        // this.get("/current", ["AUTH"], passportCall("jwt", { strategyType: "JWT" }), sessionsController.getCurrent);
+        this.get("/current", ["AUTH"], passportCall("jwt", { strategyType: "JWT" }), sessionsController.getCurrent);
 
         this.post("/register", ["NO_AUTH"], passportCall("register", { strategyType: "LOCALS" }), sessionsController.postRegister);
 

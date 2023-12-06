@@ -7,23 +7,23 @@ import DMailTemplates from "../constants/DMailTemplates.js";
 import { createHash, isValidPassword } from "../utils.js";
 import MailerService from "../services/mailerService.js";
 
-// const getCurrent = async (req, res, next) => {
+const getCurrent = async (req, res, next) => {
 
-//     req.httpLog();
+    req.httpLog();
 
-//     try {
+    try {
 
-//         const formattedUser = UsersDto.formatUser(req.user);
+        const formattedUser = UsersDto.getTokenDTOFrom(req.user);
 
-//         res.sendSuccessWithPayload(formattedUser);
+        res.sendSuccessWithPayload(formattedUser);
 
-//     } catch (error) {
+    } catch (error) {
 
-//         await errorsHandler(error, next);
+        await errorsHandler(error, next);
 
-//     }
+    }
 
-// }
+}
 
 const postRegister = async (req, res, next) => {
 
@@ -56,15 +56,11 @@ const postLogin = async (req, res, next) => {
 
         if (req.user.role !== "admin") { // req.user = User
 
-            const tokenizedUser = {
+            await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()))
 
-                _id: req.user._id,
-                email: req.user.email,
-                userName: req.user.userName,
-                role: req.user.role,
-                cart: req.user.cart
+            req.user.last_connection = new Date(Date.now());
 
-            }
+            const tokenizedUser =  UsersDto.getTokenDTOFrom(req.user);
 
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
@@ -80,10 +76,7 @@ const postLogin = async (req, res, next) => {
 
         } else if (req.user.role === "admin") { // req.admin
 
-            const tokenizedAdmin = {
-                userName: "admin",
-                role: "admin"
-            }
+            const tokenizedAdmin = UsersDto.getTokenDTOFrom(req.user)
 
             const token = jwt.sign(tokenizedAdmin, config.JWT.SECRET, { expiresIn: "1d" }); // "ultrasecretCOD3"
 
@@ -129,28 +122,21 @@ const postLoginGithubCallback = async (req, res, next) => {
                 // await errorsHandler(error, next);
             }
 
-            const tokenizedUser = {
+            await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()));
 
-                _id: req.user._id,
-                email: req.user.email,
-                userName: req.user.userName,
-                role: req.user.role,
-                cart: req.user.cart
-            }
+            req.user.last_connection = new Date(Date.now());
+
+            const tokenizedUser = UsersDto.getTokenDTOFrom(req.user);
 
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
-            res.cookie(config.JWT.COOKIE, token, { httpOnly: true }); // authCookie
+            res.cookie(config.JWT.COOKIE, token, { httpOnly: true });
 
             res.redirectPage('/products');
 
-
         } else if (req.user.role === "admin") { // req.admin
 
-            const tokenizedAdmin = {
-                userName: "admin",
-                role: "admin"
-            };
+            const tokenizedAdmin = UsersDto.getTokenDTOFrom(req.user)
 
             const token = jwt.sign(tokenizedAdmin, config.JWT.SECRET, { expiresIn: "1d" }); // "ultrasecretCOD3"
 
@@ -198,13 +184,11 @@ const postLoginGoogleCallback = async (req, res, next) => {
                 // await errorsHandler(error, next);
             }
 
-            const tokenizedUser = {
-                _id: req.user._id,
-                email: req.user.email,
-                userName: req.user.userName,
-                role: req.user.role,
-                cart: req.user.cart
-            }
+            await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()));
+
+            req.user.last_connection = new Date(Date.now());
+
+            const tokenizedUser = UsersDto.getTokenDTOFrom(req.user)
 
             const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
 
@@ -212,13 +196,9 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
             res.redirectPage('/products');
 
-
         } else if (req.user.role === "admin") { // req.admin
 
-            const tokenizedAdmin = {
-                userName: "admin",
-                role: "admin"
-            };
+            const tokenizedAdmin = UsersDto.getTokenDTOFrom(req.user);
 
             const token = jwt.sign(tokenizedAdmin, config.JWT.SECRET, { expiresIn: "1d" }); // "ultrasecretCOD3"
 
@@ -265,6 +245,8 @@ const postLogout = async (req, res, next) => {
         res.clearCookie(config.JWT.COOKIE);
 
         res.clearCookie("cart");
+
+        await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()))
 
         return res.sendSuccess("Successfully logged out");
 
@@ -349,7 +331,7 @@ const restorePassword = async (req, res, next) => {
 
 export default {
 
-    // getCurrent,
+    getCurrent,
     postRegister,
     postLogin,
     postLoginGithub,

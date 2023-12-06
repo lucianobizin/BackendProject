@@ -1,5 +1,6 @@
 const submainContainer = document.getElementById("submain-container")
 const chatButton = document.getElementById("chat-button");
+const productsButton = document.getElementById("products-button");
 const chatContainer = document.getElementById("chat-container");
 const closeChatButton = document.getElementById("close-chat-button");
 const loadingText = document.getElementById("loading-text");
@@ -18,6 +19,10 @@ const socket = io({
 });
 
 fetchUser();
+
+productsButton.addEventListener("click", function (){
+    window.location.href = "/products";
+})
 
 chatButton.addEventListener("click", function () {
     submainContainer.style.width = "50%";
