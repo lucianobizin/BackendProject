@@ -1,17 +1,27 @@
 <div class="main-container">
     <div class="card">
         <div class="container">
+            
+            <img src={{this.user.profileImage}} alt="Profile Image" id="profileImage">
             <h1>Profile de {{this.user.userName}}</h1>
             <p id="userId">Id: {{this.user._id}}</p>
             <p>Email: {{this.user.email}}</p>
             <p>Role: {{this.user.role}}</p>
 
+            <p>{{#if this.user.identification}} &#10004; {{else}} &#10008; {{/if}} Identification</p>
+
+            <p>{{#if this.user.addressProof}} &#10004; {{else}} &#10008; {{/if}} Address Proof</p>
+
+            <p>{{#if this.user.bankStatement}} &#10004; {{else}} &#10008; {{/if}} Bank Statement</p>
+
+            <button id="uploadDocuments">Upload documents</button>
             <button id="upgradeRoleButton">Upgrade role</button>
             <button id="logoutButton">Logout</button>
         </div>
     </div>
 </div>
 
+<script src="./js/uploadDocuments.js"></script>
 <script src="./js/upgradeRole.js"></script>
 <script src="./socket.io/socket.io.js"></script>
 <script src="./js/logout.js"></script>

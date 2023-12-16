@@ -14,5 +14,12 @@ upgradetButton.addEventListener("click", async (event) => {
     if (result.status === "success") {
 
         return window.location.replace('/user-upgrade')
+
+    } else {
+
+        console.log(result.error)
+        alert(result.error)
+
     }
+
 });

@@ -21,6 +21,7 @@ class ViewsRouter extends BaseRouter {
         this.get("/carts/:cid", ["AUTH"], viewsController.getCartById);
         this.get("/password-restore", ["PUBLIC"], viewsController.passwordRestore)
         this.get("/user-upgrade", ["PREMIUM", "ADMIN"], viewsController.getUserUpgrade)
+        this.get("/upload-documents", ["AUTH", "PREMIUM"], viewsController.getUploadDocuments)
 
         this.get("/loggerTester", ["PUBLIC"], viewsController.getLoggers)
         this.get("/simple", ["PUBLIC"], viewsController.getSimple);

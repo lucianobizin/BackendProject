@@ -17,7 +17,7 @@ export default class CloudStorageService {
 
     uploadFileToCloudStorage = (file_directory, file_type, file) => {
 
-        const fileName = `${Date.now()}-${file_directory}-${file_type}-${file.originalname}}`;
+        const fileName = `${Date.now()}-${file_directory}-${file_type}-${file.originalname}`;
 
          // Hay que acceder al buffer de datos del archivo y almacenarlo en un bucket (contenedor)
         const bucket = this.storage.bucket(this.bucket);

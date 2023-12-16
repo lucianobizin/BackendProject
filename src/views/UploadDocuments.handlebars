@@ -1,0 +1,37 @@
+<div class="main-container">
+
+    <div class="card">
+
+        <div class="container">
+
+            <h1>Document Upload</h1>
+
+            <form id="documentsForm" method="post" enctype="multipart/form-data">
+
+                <p id="userIdProfile">Id: {{this.user._id}}</p>
+
+                <label for="profileImage">Profile Document:</label>
+                <input type="file" id="profileImage" name="profileImage" accept="image/*" multiple>
+
+                <label for="identificationDocument">Identification Document:</label>
+                <input type="file" id="identificationDocument" name="identificationDocument" accept=".pdf, .jpg, .png">
+
+                <label for="addressProofDocument">Address Proof Document:</label>
+                <input type="file" id="addressProofDocument" name="addressProofDocument" accept=".pdf, .jpg, .png">
+
+                <label for="accountStatementDocument">Bank Statement Document:</label>
+                <input type="file" id="accountStatementDocument" name="accountStatementDocument" accept=".pdf, .jpg, .png">
+
+                <button type="submit" value="submit">Upload Documents</button>
+
+                <button id="goToProfileButton" type="button">Go to Profile</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="./js/documents.js"></script>

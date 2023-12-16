@@ -13,6 +13,23 @@ const upgradeRole = async (req, res, next) => {
 
         if (req.user.role === "premium") return res.sendForbidden("Unauthorised user");
 
+        const result = await usersService.getUserBy({_id: req.user._id})
+        
+        if(!result) res.sendBadRequest("Something goes wrong when the user's info")
+
+        req.user.documents = result.documents ? result.documents : []
+
+        const requiredDocuments = ['profileImage', 'identificationDocument', 'addressProofDocument', 'accountStatementDocument'];
+
+        const missingDocuments = requiredDocuments.filter(docType => {
+            const isDocumentPresent = req.user?.documents?.some(doc => doc.name === docType);
+            return !isDocumentPresent;
+        });
+
+        if (missingDocuments.length > 0) {
+            return res.sendBadRequest(`Must upload all documents before upgrading your role. You are lacking the following documents: ${missingDocuments.join(', ')}`);
+        }
+
         req.user.role = req.user.role !== "admin" ? "premium" : req.user.role;
 
         // if(req.user.role === "user") res.sendInternalError("Something goes wrong with the server, please, retry in a few minutes");
@@ -22,9 +39,9 @@ const upgradeRole = async (req, res, next) => {
         // res.locals.upgradeSuccess = true;
 
         const tokenizedUser = UsersDto.getTokenDTOFrom(req.user);
-        
-        const token = jwt.sign(tokenizedUser, config.JWT.SECRET, {expiresIn:"1d"});
-        
+
+        const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
+
         res.cookie(config.JWT.COOKIE, token);
 
         // res.clearCookie("authCookie");
@@ -76,42 +93,94 @@ const postDocumentation = async (req, res, next) => {
 
         let url = "";
 
-        let name;
+        let fieldname;
 
-        for (const file of req.files) {
+        const resultUser = await usersService.getUserBy({_id: req.user._id})
+        
+        if(!resultUser) res.sendBadRequest("Something goes wrong when the user's info")
 
-            name = file.originalname;
+        const documents = resultUser.documents ? resultUser.documents : [];
 
-            if (name.includes("profile")) {
+        req.user.documents = documents
 
-                url = await googleStorageService.uploadFileToCloudStorage("profile", "profile_photo", file);
+        const existingDocuments = req.user.documents || [];
+
+        let newDocuments  = [];
+
+        for (const fieldName in req.files) {
+
+            if (Object.hasOwnProperty.call(req.files, fieldName)) {
+
+                const file = req.files[fieldName][0];
+
+                console.log(file)
+
+                fieldname = file.fieldname;
+
+                if (fieldname.includes("profile")) {
+
+                    url = await googleStorageService.uploadFileToCloudStorage("profile", "profileImage", file);
+
+                }
+
+                else if (fieldname.includes("Document")) {
+
+                    if (fieldname.includes("identification")) {
+                        url = await googleStorageService.uploadFileToCloudStorage("documents", "identificationProof", file);
+                    }
+
+                    else if (fieldname.includes("address")) {
+                        url = await googleStorageService.uploadFileToCloudStorage("documents", "addressProof", file);
+                    }
+
+                    else if (fieldname.includes("account")) {
+                        url = await googleStorageService.uploadFileToCloudStorage("documents", "accountProof", file);
+                    }
+
+                }
+
+                newDocuments.push({
+                    name: fieldname,
+                    reference: url
+                })
 
             }
-
-            else if (name.includes("documents")) {
-
-                if (name.includes("identification")) {
-                    url = await googleStorageService.uploadFileToCloudStorage("documents", "identification", file);
-                }
-
-                else if (name.includes("address")) {
-                    url = await googleStorageService.uploadFileToCloudStorage("documents", "addressProof", file);
-                }
-
-                else if (name.includes("Account")) {
-                    url = await googleStorageService.uploadFileToCloudStorage("documents", "accountProof", file);
-                }
-
-            }
-
 
         }
 
-        newProduct.thumbnail = url;
+        const updatedDocuments = existingDocuments.map(existingDoc => {
 
-        const newDocument = [{ name: name, reference: url }];
+            const matchingNewDoc = newDocuments.find(newDoc => newDoc.name === existingDoc.name);
 
-        await usersService.updateUser(req.uid, newDocument);
+            if (matchingNewDoc) {
+
+                return matchingNewDoc;
+                
+            }
+
+            return existingDoc;
+        });
+
+        newDocuments.forEach(newDoc => {
+            const isDocumentAlreadyPresent = updatedDocuments.some(doc => doc.name === newDoc.name);
+            if (!isDocumentAlreadyPresent) {
+                updatedDocuments.push(newDoc);
+            }
+        });
+
+        await usersService.updateUser(req.uid, updatedDocuments);
+
+        const result = await usersService.getUserBy({_id: req.user._id})
+        
+        if(!result) res.sendBadRequest("Something goes wrong when the user's info")
+
+        const tokenizedUser = UsersDto.getTokenDTOFrom(result);
+
+        tokenizedUser.documents = result.documents;
+
+        const token = jwt.sign(tokenizedUser, config.JWT.SECRET, { expiresIn: "1d" });
+
+        res.cookie(config.JWT.COOKIE, token);
 
         res.sendSuccess("Documents successfully updated");
 

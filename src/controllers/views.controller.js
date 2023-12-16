@@ -1,9 +1,10 @@
 import { format } from "path";
-import { productsService, cartsService } from "../services/index.js";
+import { productsService, cartsService, usersService } from "../services/index.js";
 import { errorsHandler } from "./error.controller.js";
 import jwt from "jsonwebtoken";
 import config from "../config/config.js";
 import UsersDto from "../dto/UsersDto.js";
+import { __dirname } from "../utils.js";
 
 const getRegisterPage = async (req, res, next) => {
 
@@ -46,7 +47,96 @@ const getProfilePage = async (req, res, next) => {
 
     try {
 
+        const result = await usersService.getUserBy({_id: req.user._id})
+        
+        if(!result) res.sendBadRequest("Something goes wrong when the user's info")
+
+        req.user.documents = result?.documents
+
+        const documents = req.user.documents ? req.user.documents : [];
+
+        let profileImage = {
+
+            name: "unknown",
+            reference: `/img/unknown_profile_image.jpg`
+
+        };
+
+        let profileIdentification = {
+
+            name: undefined,
+            reference: undefined
+
+        };
+
+        let profileAddressProof = {
+
+            name: undefined,
+            reference: undefined
+
+        };
+
+        let profileBankStatement = {
+
+            name: undefined,
+            reference: undefined
+
+        };
+
+        for (let document of documents) {
+
+            if (document.name === "profileImage") {
+
+                profileImage = {
+
+                    name: document.name,
+                    reference: document.reference
+
+                }
+
+            }
+
+            else if (document.name === "identificationDocument") {
+
+                profileIdentification = {
+
+                    name: document.name,
+                    reference: document.reference
+
+                }
+
+            }
+
+            else if (document.name === "addressProofDocument") {
+
+                profileAddressProof = {
+
+                    name: document.name,
+                    reference: document.reference
+
+                }
+
+            }
+
+            else if (document.name === "accountStatementDocument") {
+
+                profileBankStatement = {
+
+                    name: document.name,
+                    reference: document.reference
+
+                }
+
+            }
+
+        }
+
         const user = UsersDto.getTokenDTOFrom(req.user);
+
+        user.profileImage = profileImage.reference;
+        user.identification = profileIdentification.reference;
+        user.addressProof = profileAddressProof.reference;
+        user.bankStatement = profileBankStatement.reference;
 
         res.renderPage("Profile", { css: "./css/profile.css", user });
 
@@ -280,7 +370,7 @@ const getUserUpgrade = async (req, res, next) => {
 
     try {
 
-        if(req.user.role !== "premium") return res.sendForbidden("Access not allowed");
+        if (req.user.role !== "premium") return res.sendForbidden("Access not allowed");
 
         const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/user-upgrade.css`;
 
@@ -294,6 +384,31 @@ const getUserUpgrade = async (req, res, next) => {
 
     }
 
+}
+
+const getUploadDocuments = async (req, res, next) => {
+
+    req.httpLog();
+
+
+
+    try {
+
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/upload-documents.css`;
+
+        const user = UsersDto.getTokenDTOFrom(req.user);
+
+        res.renderPage("UploadDocuments", {
+            user,
+            css
+        })
+        
+
+    } catch (error) {
+
+        await errorsHandler(error, next);
+
+    }
 }
 
 export default {
@@ -310,6 +425,7 @@ export default {
     getSimple,
     getComplex,
     getProductCreator,
-    getUserUpgrade
+    getUserUpgrade,
+    getUploadDocuments
 
 }
