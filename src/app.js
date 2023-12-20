@@ -105,11 +105,9 @@ if (cluster.isPrimary) {
 
     app.use((error, req, res, next) => {
 
-        // console.log("ERROR IN APP ---> \n", error);
-
         console.log(error)
 
-        // Plan de acción luego de haber identificado y controlado el error
+        // Action plan after having identified and controlled errors
         if (error.sendMail) {
 
             console.log("Se envió un email con el error")
@@ -119,7 +117,7 @@ if (cluster.isPrimary) {
 
     const io = new Server(server);
 
-    // Socket escuchando el evento primario de conexión 
+    // Socket listening to the primary connection event 
     io.on("connection", socket => {
         console.log(`Socket connected: ${socket.id}`);
         registerChatHandler(io, socket);

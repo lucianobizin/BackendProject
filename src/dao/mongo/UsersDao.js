@@ -2,6 +2,10 @@ import usersModel from "./models/user.js";
 
 export default class UsersDao{
 
+    get = () => {
+        return usersModel.find().lean();
+    }
+
     getBy = (param) => {
         return usersModel.findOne(param).lean();
     };

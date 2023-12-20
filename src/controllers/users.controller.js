@@ -5,6 +5,37 @@ import { errorsHandler } from "./error.controller.js";
 import UsersDto from "../dto/UsersDto.js";
 import CloudStorageService from "../services/cloudStorageService.js";
 
+const getAllUsers = async (req, res, next) => {
+
+    req.httpLog();
+
+    try {
+
+        if (req.user.role !== "admin") return res.sendForbidden("Unauthorised user");
+
+        const allUsers = await usersService.getAllUsers();
+        
+        const users = UsersDto.allUsersInfo(allUsers)
+
+        if(!users) return res.sendBadRequest("There was an error when traying to deliver all users");
+
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/all-users.css`;
+
+        res.renderPage("Users", {
+            css,
+            users
+        })
+
+
+
+    } catch (error) {
+
+        await errorsHandler(error, next);
+
+    }
+
+}
+
 const upgradeRole = async (req, res, next) => {
 
     req.httpLog();
@@ -113,8 +144,6 @@ const postDocumentation = async (req, res, next) => {
 
                 const file = req.files[fieldName][0];
 
-                console.log(file)
-
                 fieldname = file.fieldname;
 
                 if (fieldname.includes("profile")) {
@@ -194,6 +223,7 @@ const postDocumentation = async (req, res, next) => {
 }
 
 export default {
+    getAllUsers,
     upgradeRole,
     getMockUsers,
     postDocumentation

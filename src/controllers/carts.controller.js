@@ -1,5 +1,8 @@
 import { cartsService, productsService, ticketsService } from "../services/index.js";
 import { errorsHandler } from "./error.controller.js"
+import DMailTemplates from "../constants/DMailTemplates.js";
+import MailerService from "../services/mailerService.js";
+import { __dirname } from "../utils.js";
 
 const getCarts = async (req, res, next) => { // Se agregó el next
 
@@ -112,7 +115,7 @@ const postCart = async (req, res, next) => {
 
             if (!product) return res.sendIncorrectParameters(`No product with id ${pid}`);
 
-            if(product.owner === req.user.email) {
+            if(product.owner === req.user?.email) {
 
                 req.warningLog(`User ${req.user.email} with role ${req.user.role} is trying to add to cart one of his/her products - Product ID ${product._id} - ${new Date().toLocaleTimeString()}`);
 
@@ -376,11 +379,18 @@ const deleteCart = async (req, res, next) => {
 
 const endPurchase = async (req, res, next) => {
 
-    // Identificar el carrito del usuario para traer su carrito completo
-
     req.httpLog();
 
     try {
+
+        const authCookie = req.cookies.authCookie;
+
+        if (!authCookie) {
+
+            return res.sendUnauthorized("User not authenticated");
+            
+        }
+
         const userCart = req.user.cart;
 
         if (!userCart) {
@@ -482,13 +492,13 @@ const endPurchase = async (req, res, next) => {
 
         };
 
-        req.infoLog("ticket ---> ", ticket)
-
         // Resolución de la compra
 
         // -- Si la compra se resolvió, gaurdar el ticket en base de datos, actualizar el stock de los productos vendidos, 
 
         const createdTicket = await ticketsService.createTicket(ticket);
+
+        req.infoLog(`createdTicket ---> ${createdTicket}`)
 
         if (!createdTicket) res.sendIncorrectParameters("Ticket was not created, something went wrong, try to repeat the process");
 
@@ -509,8 +519,24 @@ const endPurchase = async (req, res, next) => {
         if (!result) res.sendIncorrectParameters("User's cart was not updated, something went wrong");
 
         // Devolver el ticket
+        try {
 
-        res.sendSuccessWithPayload(createdTicket);
+            const mailService = new MailerService();
+
+            createdTicket.purchase_datetime.toLocaleString()
+
+            // Convertir el ticket a un objeto simple para evitar problemas con Handlebars
+            const userTicket = JSON.parse(JSON.stringify(createdTicket));
+
+            const result = await mailService.sendMail([req.user.email], DMailTemplates.PURCHASE, { userTicket }); // REVISAR el HANDLEBARS
+
+        } catch (error) {
+
+            await errorsHandler(error, next);
+
+        }
+
+        return res.sendSuccessWithPayload(createdTicket);
 
     } catch (error) {
 

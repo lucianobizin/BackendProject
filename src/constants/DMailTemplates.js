@@ -1,4 +1,7 @@
 export default {
-    WELCOME: "welcome",
-    PWD_RESTORE: "passwordrestore"
+    WELCOME: "Welcome",
+    PWD_RESTORE: "PasswordRestore",
+    PRODUCTDELETEDBYADMIN: "ProductsDeletedByAdmin",
+    PRODUCTDELETEDBYPREMIUM: "ProductDeletedByPremium",
+    PURCHASE: "Purchase"
 }

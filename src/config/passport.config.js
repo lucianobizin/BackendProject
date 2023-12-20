@@ -53,17 +53,12 @@ const initializePassport = () => {
 
                 cart = req.cookies["cart"];
 
-                console.log("cart", cart)
-
                 cart = await cartsService.getCartById(cart)
-
-                console.log("getCartById", cart)
 
                 if(cart?.expirationTime){
 
                     const confirmation = await cartsService.confirmCart(cart._id)
 
-                    console.log("Confirmation", confirmation)
                 }
 
                 cart = cart._id

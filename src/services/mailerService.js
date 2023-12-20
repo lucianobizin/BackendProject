@@ -7,12 +7,12 @@ import DMailInfo from "../constants/DMailInfo.js";
 
 export default class MailerService {
 
-    constructor(){
+    constructor() {
 
         this.client = nodemailer.createTransport({
-            service:"gmail",
-            port:587,
-            auth:{
+            service: "gmail",
+            port: 587,
+            auth: {
                 user: config.nodemailer.USER,
                 pass: config.nodemailer.PWD
             }
@@ -20,7 +20,7 @@ export default class MailerService {
         })
     }
 
-    sendMail = async(emails, template, payload) => {
+    sendMail = async (emails, template, payload) => {
         const mailInfo = DMailInfo[template];
         const html = await this.generateMailTemplate(template, payload);
         const result = await this.client.sendMail({
@@ -29,6 +29,7 @@ export default class MailerService {
             html,
             ...mailInfo
         });
+
         return result;
 
     }
@@ -37,6 +38,7 @@ export default class MailerService {
         const content = await fs.promises.readFile(`${__dirname}/templates/${template}.handlebars`, 'utf-8');
         const preCompiledContent = Handlebars.compile(content);
         const finalContent = preCompiledContent(payload);
+
         return finalContent;
     }
 

@@ -1,27 +1,27 @@
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const validateJWT = (req, res, next) => {
+// const validateJWT = (req, res, next) => {
 
-    const authHeaders = req.headers.authorization;
+//     const authHeaders = req.headers.authorization;
 
-    if(!authHeaders) return res.status(401).send({status:"error", message:"Not logged in"});
+//     if(!authHeaders) return res.status(401).send({status:"error", message:"Not logged in"});
 
-    const token = authHeaders.split(" ")[1];
+//     const token = authHeaders.split(" ")[1];
 
-    try{
+//     try{
         
-        const userInfo = jwt.verify(token, "secretCoderPassword");
+//         const userInfo = jwt.verify(token, "secretCoderPassword");
 
-        req.user = userInfo;
+//         req.user = userInfo;
         
-        next();
+//         next();
 
-    } catch(error){
+//     } catch(error){
 
-        res.status(401).send({status:"error", message:"Token error"});
-    }
+//         res.status(401).send({status:"error", message:"Token error"});
+//     }
 
 
-} 
+// } 
 
-export default validateJWT
+// export default validateJWT

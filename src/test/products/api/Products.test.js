@@ -1,5 +1,6 @@
 import { expect } from "chai"; // chai validates procedures
 import supertest from "supertest"; // supertest makes requests
+import config from "../../../config/config.js";
 
 const requester = supertest("http://localhost:8080")
 
@@ -13,8 +14,8 @@ describe("Testing the creation of a new product by admin", function () {
     it("Endpoint POST /api/sessions/login - it should connect to the login endpoint", async function () {
 
         const mockUser = {
-            email: "adminCoder@coder.com",
-            password: "adminCod3r123"
+            email: config.app.ADMIN_EMAIL,
+            password: config.app.ADMIN_PASSWORD
         };
 
 
@@ -62,6 +63,7 @@ describe("Testing the creation of a new product by admin", function () {
             expect(response._body.payload).to.be.ok;
 
         } catch (error) {
+            
             console.error(error);
         }
 

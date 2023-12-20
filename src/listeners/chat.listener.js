@@ -1,6 +1,6 @@
 import { messagesService } from "../services/index.js";
 
-const registerChatHandler = (io, socket) => { // We pass the io and the socket that triggers it
+const registerChatHandler = (io, socket) => { // We pass the io and the socket that triggerS it
     
     const saveMessage = async (data) => {
 

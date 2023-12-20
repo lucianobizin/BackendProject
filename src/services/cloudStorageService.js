@@ -19,16 +19,16 @@ export default class CloudStorageService {
 
         const fileName = `${Date.now()}-${file_directory}-${file_type}-${file.originalname}`;
 
-         // Hay que acceder al buffer de datos del archivo y almacenarlo en un bucket (contenedor)
+         // The file data buffer must be accessed and stored in a bucket (container)
         const bucket = this.storage.bucket(this.bucket);
         
-        // Se crea un blob, un elemento que reserva espacio y va escribiendo lo que va llegando ---> los flujos de bytes (buffers)
+        // A blob is created, an element that reserves space and writes what is arriving ---> the byte streams (buffers)
         const blob = bucket.file(fileName)
 
-        // BlobStream es el proceso / flujo de paso y escritura del bucket de un lado a otro
+        // BlobStream is the process/stream of passing and writing the bucket back and forth
         const blobStream = blob.createWriteStream();
 
-        // Convertir flujo de datos en promesas
+        // Convert data stream into promises
         return new Promise((resolve, reject) => {
 
             blobStream.on('error', error => {
@@ -38,13 +38,13 @@ export default class CloudStorageService {
             })
             blobStream.on('finish', () => {
 
-                // Se crea la URL pública en la que se creará y por la que se podrá acceder al archivo en la nube
+                // The public URL where the file will be created and accessed in the cloud
                 const publicURL = `https://storage.googleapis.com/${this.bucket}/${blob.name}`
                 resolve(publicURL);
 
             })
 
-            // Cuando se detecta que no hay más bytes por escribir se termina el proceso
+            // When it is detected that there are no more bytes to write, the process ends
             blobStream.end(file.buffer);
 
         })

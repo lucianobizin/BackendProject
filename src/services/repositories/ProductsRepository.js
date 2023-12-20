@@ -5,17 +5,9 @@ export default class ProductsService {
         this.dao = dao
     }
 
-    // getProducts = (limit, page, sort, filter) => {
-    //     return this.dao.getProducts(limit, page, sort, filter);
-    // }
-
     getProducts = (filter, limit, page, sort) => {
         return this.dao.get(filter, {limit:limit, page:page, sort:{ "price": sort }, lean:true});
     }
-
-    // getProductsById = (params) => {
-    //     return this.dao.getProductsById(params);
-    // }
 
     getProductsById = (pid) => {
 
@@ -31,14 +23,9 @@ export default class ProductsService {
         return this.dao.getBy({ code: code });
     }
 
-    // createProduct = (product) => {
-    //     return this.dao.createProduct(product);
-    // }
-
     getProductsByIds = async (productIds) => {
 
         const products = await this.dao.getAll({ _id: { $in: productIds } });
-        console.log("products ---> ", products)
         return products;
 
     };
@@ -46,10 +33,6 @@ export default class ProductsService {
     createProduct = (product) => {
         return this.dao.create(product);
     }
-
-    // updateProduct = (pid, product) => {
-    //     return this.dao.updateProduct(pid, product);
-    // }
 
     updateProduct = (pid, product) => {
         return this.dao.updateOne({ _id: pid }, { $set: product });

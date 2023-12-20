@@ -6,7 +6,7 @@ import UsersRepository from "./repositories/UsersRepository.js";
 import TicketsRepository from "./repositories/TicketsRepository.js";
 import MessagesRepository from "./repositories/MessagesRepository.js"
 
-const {ProductsDao, CartsDao, UsersDao, TicketsDao, MessagesDao} = await PersistenceFactory.getPersistence() // TOP LEVEl AWAIT
+const {ProductsDao, CartsDao, UsersDao, TicketsDao, MessagesDao} = await PersistenceFactory.getPersistence()
 
 export const productsService = new ProductsRepository(new ProductsDao());
 export const cartsService = new CartsRepository(new CartsDao());

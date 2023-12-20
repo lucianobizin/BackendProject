@@ -33,13 +33,15 @@ describe("Testing user's registration", function () {
         };
 
         try {
+
             const response = await requester.post("/api/sessions/register").send(mockUser).set('Cookie', `${cookieCart.name}=${cookieCart.value}`);
-            console.log(response);
             expect(response.status).to.be.eql(200);
             expect(response.body.payload._id).to.be.ok;
+
         } catch (error) {
+
             console.error(error);
-            // Puedes agregar más información de depuración aquí si es necesario.
+
         }
 
     })

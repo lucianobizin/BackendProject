@@ -7,7 +7,9 @@ class UserRouter extends BaseRouter {
 
     init() {
 
-        this.get("/premium/:uid", ["AUTH"], passportCall("jwt", { strategyType: "JWT" }), usersController.upgradeRole);
+        this.get("/", ["ADMIN"], usersController.getAllUsers)
+
+        this.get("/premium/:uid", ["AUTH"], usersController.upgradeRole);
 
         this.get("/mockingproducts", ["AUTH"], usersController.getMockUsers);
 

@@ -47,6 +47,21 @@ const getProfilePage = async (req, res, next) => {
 
     try {
 
+        if(req.user.role === "admin"){
+
+            const user = UsersDto.getTokenDTOFrom(req.user)
+
+            user.profileImage = `/img/unknown_profile_image.jpg`;
+            user._id = "N/A";
+            user.email = "N/A";
+            user.identification;
+            user.addressProof;
+            user.bankStatement;
+
+            return res.renderPage("Profile", { css: "./css/profile.css", user});
+
+        }
+
         const result = await usersService.getUserBy({_id: req.user._id})
         
         if(!result) res.sendBadRequest("Something goes wrong when the user's info")
@@ -138,7 +153,7 @@ const getProfilePage = async (req, res, next) => {
         user.addressProof = profileAddressProof.reference;
         user.bankStatement = profileBankStatement.reference;
 
-        res.renderPage("Profile", { css: "./css/profile.css", user });
+        return res.renderPage("Profile", { css: "./css/profile.css", user });
 
     } catch (error) {
 
@@ -250,9 +265,13 @@ const getCartById = async (req, res, next) => {
 
         if (!cart) return res.sendIncorrectParameters("Cart not found");
 
+        if(req.cid !== cart._id.toString()) return res.sendUnauthorized("Illegal action")
+
         if (!cart.products || !Array.isArray(cart.products)) return res.sendIncorrectParameters("Cart products are missing or not an array");
 
-        res.renderPage("Cart", { cart });
+        const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/cart.css`
+
+        return res.renderPage("Cart", { cart, css });
 
     } catch (error) {
 
@@ -352,7 +371,7 @@ const getProductCreator = async (req, res, next) => {
 
         const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/product-creator.css`
 
-        res.renderPage("ProductCreator", {
+        return res.renderPage("ProductCreator", {
             css,
         })
 
@@ -390,8 +409,6 @@ const getUploadDocuments = async (req, res, next) => {
 
     req.httpLog();
 
-
-
     try {
 
         const css = `${req.protocol}://${req.hostname}:${config.app.PORT || 8080}/css/upload-documents.css`;
@@ -426,6 +443,6 @@ export default {
     getComplex,
     getProductCreator,
     getUserUpgrade,
-    getUploadDocuments
+    getUploadDocuments,
 
 }

@@ -1,0 +1,29 @@
+<div class="ticket-container" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+
+    <h1 style="color: #333; text-align: center;">Ticket details</h1>
+
+    <div class="ticket-info" style="margin-top: 20px;">
+
+        <div class="info-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span class="info-label" style="font-weight: bold; width: 150px;">Code:</span>
+            <span>{{userTicket.code}}</span>
+        </div>
+
+        <div class="info-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span class="info-label" style="font-weight: bold; width: 150px;">Date and Time:</span>
+            <span>{{userTicket.purchase_datetime}}</span>
+        </div>
+
+        <div class="info-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span class="info-label" style="font-weight: bold; width: 150px;">Amount:</span>
+            <span>{{userTicket.amount}} €</span>
+        </div>
+
+        <div class="info-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span class="info-label" style="font-weight: bold; width: 150px;">Purchaser:</span>
+            <span>{{userTicket.purchaser}}</span>
+        </div>
+
+    </div>
+
+</div>

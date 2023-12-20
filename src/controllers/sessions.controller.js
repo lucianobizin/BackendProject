@@ -6,6 +6,8 @@ import { usersService } from "../services/index.js";
 import DMailTemplates from "../constants/DMailTemplates.js";
 import { createHash, isValidPassword } from "../utils.js";
 import MailerService from "../services/mailerService.js";
+import { __dirname } from "../utils.js";
+import fs from "fs";
 
 const getCurrent = async (req, res, next) => {
 
@@ -115,11 +117,10 @@ const postLoginGithubCallback = async (req, res, next) => {
 
             } catch (error) {
 
-                console.log(error)
+                req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
 
-                // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
-
-                // await errorsHandler(error, next);
+                await errorsHandler(error, next);
+                
             }
 
             await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()));
@@ -167,7 +168,7 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
     try {
 
-        if (req.user.role !== "admin") { // req.user = User
+        if (req.user.role !== "admin") {
 
             try {
 
@@ -177,11 +178,10 @@ const postLoginGoogleCallback = async (req, res, next) => {
 
             } catch (error) {
 
-                console.log(error)
+                req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
 
-                // req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+                await errorsHandler(error, next);
 
-                // await errorsHandler(error, next);
             }
 
             await usersService.last_connectionUpdate(req.user._id, new Date(Date.now()));
@@ -280,8 +280,6 @@ const passwordRestoreRequest = async (req, res, next) => {
 
     } catch (error) {
 
-        console.log(error)
-
         res.errorsHandler(error, next)
 
     }
@@ -301,8 +299,6 @@ const restorePassword = async (req, res, next) => {
 
         const { email } = jwt.verify(token, config.JWT.SECRET);
 
-        console.log(email)
-
         const user = await usersService.getUserBy({ email: email });
 
         if (!user) return res.sendIncorrectParameters("User does not exist");
@@ -315,15 +311,11 @@ const restorePassword = async (req, res, next) => {
 
         const result = await usersService.passwordUpdate(user._id, hashedNewPassword);
 
-        console.log(result)
-
         res.sendSuccess("Password updated");
 
     } catch (error) {
 
-        console.log(error)
-
-        // await errorsHandler(error, next);
+        await errorsHandler(error, next);
 
     }
 

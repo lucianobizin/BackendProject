@@ -1,0 +1,73 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+}
+
+.user-details {
+    flex-grow: 1;
+}
+
+h2 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+p {
+    margin: 0;
+    color: #555;
+}
+
+#profileImage {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los íconos de verificación */
+.user-details p::before {
+    display: inline-block;
+    content: '\2713'; /* ✔ */
+    color: #4CAF50;
+    margin-right: 5px;
+}
+
+.user-details p.false::before {
+    content: '\2718'; /* ✘ */
+    color: #FF4500;
+}
+
+/* Estilos para pantallas más pequeñas (móviles) */
+@media only screen and (max-width: 600px) {
+    .user-card {
+        padding: 10px;
+    }
+
+    .user-avatar {
+        margin-bottom: 10px;
+    }
+}

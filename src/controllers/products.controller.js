@@ -1,7 +1,8 @@
 import CloudStorageService from "../services/cloudStorageService.js";
 import { productsService } from "../services/index.js";
-import { generateUsers } from "../mocks/mockProducts.js";
 import { errorsHandler } from "./error.controller.js";
+import MailerService from "../services/mailerService.js";
+import DMailTemplates from "../constants/DMailTemplates.js";
 
 const getProducts = async (req, res, next) => {
 
@@ -67,7 +68,7 @@ const postProducts = async (req, res, next) => {
                 owner: req.user.email
             }
 
-        } else if ((req.user.role === "admin")){
+        } else if ((req.user.role === "admin")) {
 
             newProduct = {
                 title,
@@ -82,7 +83,7 @@ const postProducts = async (req, res, next) => {
 
         const newProductCheckingCode = await productsService.getProductsByCode(newProduct.code);
 
-        if(newProductCheckingCode) return res.sendIncorrectParameters("Incorrect values");
+        if (newProductCheckingCode) return res.sendIncorrectParameters("Incorrect values");
 
         const googleStorageService = new CloudStorageService();
 
@@ -136,23 +137,23 @@ const putProducts = async (req, res, next) => {
             status
         };
 
-        
+
         const product = await productsService.getProductsById({ _id: req.pid });
 
         if (!product) return sendIncorrectParameters(`Product with id ${req.pid} does not exist`);
 
-        if(product.owner === "admin" && req.user.role === "premium") {
+        if (product.owner === "admin" && req.user.role === "premium") {
 
             req.warningLog(`User ${req.user.email} with ${req.user.role} is trying to modify admin's product ${product._id}- ${new Date().toLocaleTimeString()}`);
-            
+
             res.sendForbidden("Premium users are not allowed to modify admin's products");
 
         }
 
-        if((req.user.role === "admin") || (req.user.role === "premium" && product.owner !== "admin")) {
+        if ((req.user.role === "admin") || (req.user.role === "premium" && product.owner !== "admin")) {
 
             await productsService.updateProduct(req.pid, updatedProduct);
-    
+
             res.sendSuccess(`Product with id ${req.pid} was updated`);
 
         }
@@ -165,7 +166,7 @@ const putProducts = async (req, res, next) => {
 
 };
 
-const deleteProducts = async (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
 
     req.httpLog();
 
@@ -175,19 +176,57 @@ const deleteProducts = async (req, res, next) => {
 
         if (!product) return res.sendIncorrectParameters(`Product with id ${req.pid} does not exist`);
 
-        if(product.owner === "admin" && req.user.role === "premium") {
+        if (product.owner === "admin" && req.user.role === "premium") {
 
             req.warningLog(`User ${req.user.email} with ${req.user.role} is trying to delete admin's product ${product._id}- ${new Date().toLocaleTimeString()}`);
-            
+
             res.sendForbidden("Premium users are not allowed to delete admin's products");
 
         }
 
-        if((req.user.role === "admin") || (product.owner !== "admin" && req.user.role === "premium" && product.owner === req.user.email)) {
+        if (req.user.role === "admin") {
 
             await productsService.deleteProduct(req.pid);
-    
-            res.sendSuccess(`Product with id ${req.pid} was deleted`);
+
+            if (product.owner !== "adminCoder@coder.com") {
+
+                try {
+
+                    const mailService = new MailerService();
+
+                    const result = await mailService.sendMail([product.owner], DMailTemplates.PRODUCTDELETEDBYADMIN, { productOwner: product.owner, product: product });
+
+                } catch (error) {
+
+                    req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+
+                    await errorsHandler(error, next);
+                }
+            }
+
+            return res.sendSuccess(`Product with id ${req.pid} was deleted by admin`);
+        }
+
+
+        if (product.owner !== "admin" && req.user.role === "premium" && product.owner === req.user.email) {
+
+            await productsService.deleteProduct(req.pid);
+
+            try {
+
+                const mailService = new MailerService();
+
+                const result = await mailService.sendMail([product.owner], DMailTemplates.PRODUCTDELETEDBYPREMIUM, { productOwner: product.owner, product: product });
+
+            } catch (error) {
+
+                req.errorLog(`Email to ${req.user.email} could not be sent - ${new Date().toLocaleTimeString()}`)
+
+                await errorsHandler(error, next);
+            }
+
+            return res.sendSuccess(`Product with id ${req.pid} was deleted by product owner ${product.owner}`);
+
 
         } else {
 
@@ -207,5 +246,5 @@ export default {
     getProducts,
     postProducts,
     putProducts,
-    deleteProducts
+    deleteProduct
 }

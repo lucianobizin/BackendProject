@@ -5,9 +5,9 @@ export default class UsersRepository {
         this.dao = dao;
     }
 
-    // getUserBy(param){
-    //     return this.dao.getUserBy(param);
-    // }
+    getAllUsers(){
+        return this.dao.get();
+    }
 
     getUserBy(param){
         return this.dao.getBy(param);

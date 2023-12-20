@@ -31,9 +31,15 @@ export default class PersistenceFactory {
                 break;
             }
 
-            // FALTA DESARROLLAR LOS CARTSDAO Y LOS USERSDAO y TERMINAR DE ADAPTAR EL PRODUCTSDAO (SE DEJA EL CÓDIGO
-            // PARA QUE SE PUEDA REVISAR LA INICIALIZACIÓN CON FS, SOLO A MODO EDUCATIVO, DESARROLLAR LA LÓGICA DE 
-            // ALMACENAMIENTO EN LOCAL EXCEDE LO SOLICITADO)
+            // -----------------------------------------------------
+            
+            // CASE "FS"
+
+            // THE CARTSDAO AND THE USERSDAO NEED TO BE DEVELOPED AND THE PRODUCTSDAO FINISHED TO BE FINISHED (THE CODE IS LEFT
+            // SO THAT THE INITIALIZATION CAN BE REVIEWED WITH FS, ONLY FOR AN EDUCATIONAL WAY, DEVELOP THE LOGIC OF
+            // LOCAL STORAGE EXCEEDS WHAT IS REQUESTED HERE)
+            
+            // -----------------------------------------------------
 
             case "FS": {
 

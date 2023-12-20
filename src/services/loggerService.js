@@ -34,7 +34,7 @@ export default class LoggerService {
 
                         new winston.transports.Console({
 
-                            level:"info" // El desafío pedía debug pero siguiendo al profe modifiqué los niveles de logueo
+                            level:"info"
 
                         })
 
@@ -54,7 +54,7 @@ export default class LoggerService {
 
                         new winston.transports.Console({
 
-                            level:"http"   	// El desafío pedía info pero siguiendo al profe y modifiqué los niveles de logueo
+                            level:"http"
 
                         }),
                 

@@ -1,0 +1,20 @@
+<h1>User List</h1>
+
+{{#each users}}
+<div class="user-card">
+    <img src={{this.profileImage}} alt="Profile" class="user-avatar">
+    <div class="user-details">
+        <h2>{{this.firstName}} {{this.lastName}}</h2>
+        <p>Email: {{this.email}}</p>
+        <p>Username: {{this.userName}}</p>
+        <p>Role: {{this.role}}</p>
+        <h3>Documents:</h3>
+        {{#each this.documents}}
+        <p>
+            Name: {{this.name}},
+            Reference: <a href={{this.reference}} target="_blank">open</a>
+        </p>
+        {{/each}}
+    </div>
+</div>
+{{/each}}
