@@ -3,5 +3,6 @@ export default {
     PWD_RESTORE: "PasswordRestore",
     PRODUCTDELETEDBYADMIN: "ProductsDeletedByAdmin",
     PRODUCTDELETEDBYPREMIUM: "ProductDeletedByPremium",
-    PURCHASE: "Purchase"
+    PURCHASE: "Purchase",
+    ERROR: "Error"
 }

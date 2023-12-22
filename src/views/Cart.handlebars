@@ -6,7 +6,7 @@
         {{#each cart.products}}
         <div class="product-card">
             <h2>{{this.pid.title}}</h2>
-            <img src="{{this.pid.thumbnail.[0]}}" alt="{{this.pid.title}}">
+            <img src={{this.pid.thumbnail.[0]}} alt={{this.pid.title}}>
             <p class="description">Description: {{this.pid.description}}</p>
             <p>Price: {{this.pid.price}}</p>
             <p>Stock: {{this.pid.stock}}</p>

@@ -196,7 +196,10 @@ const getRenderedProducts = async (req, res, next) => {
 
         const paginationProducts = await productsService.getProducts(filter, limit, page, sort);
 
-        const products = paginationProducts.docs;
+        const products = paginationProducts.docs.map(product => ({
+            ...product,
+            stockGreaterThanZero: product.stock > 0
+        }));
 
         const currentPage = paginationProducts.page;
 

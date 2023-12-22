@@ -148,7 +148,7 @@ const postCart = async (req, res, next) => {
 
             await cartsService.updateCart(cid, cart.products);
 
-            res.sendSuccess(`Cart updated with product ${product._id} and quantity ${quantity}`);
+            res.sendSuccess(`Added product ${product._id} and quantity ${quantity}`);
 
         } catch (e) {
 
@@ -383,7 +383,7 @@ const endPurchase = async (req, res, next) => {
 
     try {
 
-        const authCookie = req.cookies.authCookie;
+        const authCookie = req.cookies["authCookie"];
 
         if (!authCookie) {
 
@@ -476,7 +476,7 @@ const endPurchase = async (req, res, next) => {
             return accumulator + tempProdSum;
         }, 0);
 
-        if (totalPurchase === 0) res.sendIncorrectParameters("Empty cart")
+        if (totalPurchase === 0) res.sendIncorrectParameters("Empty cart or stock unavailable")
 
         // Extrayendo el email del usuario
         const userEmail = req.user.email;
@@ -500,6 +500,7 @@ const endPurchase = async (req, res, next) => {
 
         req.infoLog(`createdTicket ---> ${createdTicket}`)
 
+
         if (!createdTicket) res.sendIncorrectParameters("Ticket was not created, something went wrong, try to repeat the process");
 
         for (let newProdStock of newProductsStock) {
@@ -516,7 +517,7 @@ const endPurchase = async (req, res, next) => {
 
         const result = await cartsService.updateCart(userCart, req.user.cart);
 
-        if (!result) res.sendIncorrectParameters("User's cart was not updated, something went wrong");
+        if (!result) return res.sendIncorrectParameters("User's cart was not updated, something went wrong");
 
         // Devolver el ticket
         try {

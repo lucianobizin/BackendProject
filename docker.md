@@ -20,7 +20,7 @@ Es una plataforma gestora de contenedores que permite empaquetar aplicativos que
 
 El proceso de contenerización con Docker consiste básicamente en 3 pasos:
 
-* Paso 1: construcción del dockerfile
+* Paso 1: Construcción del dockerfile
 
 Se debe crear un archivo dockerfile en el proyecto, el cual contendrá las instrucciones necesarias para que docker pueda generar la imagen (blueprint) del aplicativo a contenerizar.
 
@@ -63,8 +63,52 @@ CMD ["node", "src/app.js"]: ejecuta el comando "node" y se define los parámetro
 
 ![Alt text](image.png)
 
+* Paso 2: Contrucción de un contenedor
 
-* Paso 2:
-* Paso 3:
+Construye un contenedor a partir de la carpeta en la que se está ejecutando el comando (.) y se pone un tag (-t), nombre de usuario y versión. 
+
+En la consola escribir: docker build . -t usuario/ejemplodocker:version (ej. docker build . -t luchobizin/ejemplodocker:1.0.0)
+
+* Paso 3: Carga de un contenedor
+
+En la consola escribir: docker run -p 8080:8080 usuario/nombredelcontenedor:version (ej. docker run -p 8080:8080 luchobizin/backendprojectcoder:1.0.0)
+
+*NOTA: el primer 8080 se refiere al puerto en el sistema host, y el segundo 8080 al puerto dentro del contenedor Docker. El 8080 (en el sistema host), es el puerto de la máquina host (donde se está ejecutando Docker). Este se debe mapear al puerto del contenedor. El segundo puerto 8080 es el del contenedor Docker. Este es el puerto en el contenedor Docker en sí mismo. La app dentro del contenedor debe estar escuchando en ese puerto para que se pueda acceder a ella desde el sistema host a través del puerto mapeado.* 
+
+* Comando útiles:
+
+- Lista imágenes activas: docker image ls
+- Lista contenedores activos: docker container ls
+- Exporta un contenedor a un archivo tar: docker export contenedorfeliz -o contenedor.tar
+- Detiene un contenedor por nombre-imagen y versión: docker ps -a | grep luchobizin/backendserverdocker:1.0.0 | awk '{print $1}' | xargs docker stop
+- Elimina una imagen por nombre y versión: docker rmi luchobizin/dockerbackendproject:1.0.0
+- Detiene un contenedor por su ID: docker stop 538d23235f91
+- Elimina un contenedor por su ID o nombre: docker rm ID_o_nombre_del_contenedor
+- Intenta eliminar una imagen nuevamente: docker rmi luchobizin/backendserverdocker:1.0.0
+
+* Diferencias entre docker run y docker-compose up:
+
+- docker run:
+
+Uso: Este comando se utiliza para ejecutar un contenedor a partir de una imagen específica.
+Ejecución de un solo contenedor: Generalmente se usa para iniciar un solo contenedor.
+Sintaxis básica: docker run [opciones] imagen [comando] [argumentos].
+Ejemplo: docker run -p 8080:8080 luchobizin/backendprojectcoder:1.0.0.
+Observaciones: Puede ser usado sin un archivo de configuración adicional, y es ideal para casos simples o cuando se necesita un control directo y específico sobre el contenedor.
+
+- docker-compose up -d:
+Uso: Este comando se utiliza para ejecutar aplicaciones definidas en un archivo de configuración docker-compose.yml. Este archivo puede especificar múltiples servicios, volúmenes, redes, y otras configuraciones relacionadas con la aplicación.
+Ejecución de múltiples servicios: Ideal para iniciar aplicaciones compuestas por varios servicios o contenedores que necesitan trabajar juntos.
+Sintaxis básica: docker-compose up -d.
+Ejemplo: Si tienes un archivo docker-compose.yml configurado, puedes ejecutar docker-compose up -d en el mismo directorio que el archivo para iniciar todos los servicios definidos en él.
+Observaciones: docker-compose proporciona una forma de definir y orquestar múltiples contenedores, configurando redes y volúmenes, lo que facilita el despliegue y la gestión de aplicaciones más complejas.
+
+
+
+
+
+
+
+
 
 

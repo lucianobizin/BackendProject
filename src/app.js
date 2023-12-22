@@ -8,6 +8,7 @@ import cors from "cors";
 import cluster from "cluster"
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUIExpress from "swagger-ui-express";
+import { inspect } from 'util';
 
 import { Server } from "socket.io";
 
@@ -24,11 +25,14 @@ import SessionsRouter from "./routes/sessions.router.js";
 import messageRouter from "./routes/message.router.js";
 import usersRouter from "./routes/users.router.js";
 
+import DMailTemplates from "../src/constants/DMailTemplates.js";
+import MailerService from "../src/services/mailerService.js";
+
 import registerChatHandler from "./listeners/chat.listener.js";
 
 if (cluster.isPrimary) {
 
-    console.log(`Soy el proceso principal y cuento con un pid ${process.pid}`);
+    console.log(`Principal process: ${process.pid}`);
 
     const cpus = os.cpus().length;
 
@@ -42,13 +46,16 @@ if (cluster.isPrimary) {
 
         console.log(`Worker with ${worker.process.pid} died`);
 
+        // Listar los procesos de Node.js ---> tasklist /fi "imagename eq node.exe"
+        // Eliminar un proceso de Node.js por pid --> taskkill /pid 5272 -f
+
         cluster.fork();
 
     });
 
 } else {
 
-    console.log(`Yo soy el proceso hijo con ${process.pid}`)
+    console.log(`Child process: ${process.pid}`)
 
     const app = express();
 
@@ -74,7 +81,7 @@ if (cluster.isPrimary) {
     };
 
     const swaggerSpec = swaggerJSDoc(swaggerSpecOptions);
-    app.use("/apidocs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerSpec)); // Configure view using swaggerSpec
+    app.use("/apidocs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerSpec)); // This configures view using swaggerSpec
 
     app.engine("handlebars", Handlebars.engine());
     app.set("views", `${__dirname}/views`);
@@ -107,10 +114,24 @@ if (cluster.isPrimary) {
 
         console.log(error)
 
-        // Action plan after having identified and controlled errors
+        error.sendMail = true;
+
+        const mailer = async (error) => {
+
+            const mailService = new MailerService();
+
+            const errorDetails = inspect(error, { showHidden: false, depth: null });
+
+            await mailService.sendMail([config.app.ERROR], DMailTemplates.ERROR, { errorDetails });
+        }
+
+        // An action plan after having identified and controlled errors
         if (error.sendMail) {
 
+            mailer(error)
+
             console.log("Se envió un email con el error")
+
         }
         res.status(500).send("Something goes wrong");
     })

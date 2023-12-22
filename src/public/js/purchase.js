@@ -1,26 +1,20 @@
-const purchaseButton = document.getElementById("purchaseButton");
+document.addEventListener("DOMContentLoaded", function () {
 
-function getCookie(name) {
+    const purchaseButton = document.getElementById("purchaseButton");
 
-    const value = `; ${document.cookie}`;
-
-    const parts = value.split(`; ${name}=`);
-
-    if (parts.length === 2) return parts.pop().split(";").shift();
-
-}
-
-const cartId = getCookie("cart");
-
-const authCookie = getCookie("authCookie");
-
-if (authCookie) {
+    // if (authCookie) {
 
     purchaseButton.addEventListener('click', async (e) => {
 
         e.preventDefault();
 
         try {
+
+            const authCookie = getCookie("authCookie");
+            console.log(authCookie)
+        
+            const cartId = getCookie("cart");
+            console.log(cartId)
 
             if (cartId) {
 
@@ -37,7 +31,7 @@ if (authCookie) {
 
                 } else {
 
-                    alert('Error ending the purchase. Please try it again.');
+                    alert('Error ending the purchase. Please register first.');
 
                     window.location.reload();
 
@@ -61,11 +55,22 @@ if (authCookie) {
 
     })
 
-} else {
+    // } else {
 
     // Si la cookie "authcookie" no existe, desactivar el botón de compra
-    purchaseButton.disabled = true;
-    alert("You need to be registered and logged in to buy a product")
+    //     purchaseButton.disabled = true;
+    //     alert("You need to be registered and logged in to buy a product")
+
+    // }
+
+})
+
+function getCookie(name) {
+
+    const value = `; ${document.cookie}`;
+
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) return parts.pop().split(";").shift();
 
 }
-

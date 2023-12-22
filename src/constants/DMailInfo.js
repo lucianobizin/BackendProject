@@ -45,7 +45,7 @@ export default {
         ]
     },
     Purchase:{
-        subject: "Product deleted by premium user",
+        subject: "Purchase ticket info",
         attachments: [
             {
                 filename: "banner.jpg",
@@ -54,5 +54,8 @@ export default {
 
             }
         ]
+    },
+    Error:{
+        subject: "Error info"
     }
 }

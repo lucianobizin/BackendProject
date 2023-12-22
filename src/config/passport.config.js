@@ -276,7 +276,7 @@ const initializePassport = () => {
 
         jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
 
-        secretOrKey: config.JWT.SECRET // "ultrasecretCOD3"
+        secretOrKey: config.JWT.SECRET
 
     }, async (payload, done) => {
 

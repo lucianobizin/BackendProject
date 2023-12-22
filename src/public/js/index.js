@@ -22,45 +22,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    const forms = document.querySelectorAll(".buyForm"); 
+    const forms = document.querySelectorAll(".buyForm");
 
     forms.forEach((form) => {
 
         form.addEventListener("submit", async (e) => {
 
-        e.preventDefault();
+            e.preventDefault();
 
-        const data = new FormData(form);
+            const data = new FormData(form);
 
-        const obj = {};
+            const obj = {};
 
-        data.forEach((value, key) => {
+            data.forEach((value, key) => {
 
-            obj[key] = value;
+                obj[key] = value;
 
-        });
+            });
 
-        const cart = getCookie("cart");
+            const cart = getCookie("cart");
 
-        const response = await fetch(`/api/carts/${cart}/product/${obj['pid']}?quantity=${obj['quantity']}}`, {
+            const response = await fetch(`/api/carts/${cart}/product/${obj['pid']}?quantity=${obj['quantity']}}`, {
 
-            method: 'POST',
+                method: 'POST',
 
-            body: JSON.stringify(obj),
+                body: JSON.stringify(obj),
 
-            headers: {
+                headers: {
 
-            "Content-Type": 'application/json'
+                    "Content-Type": 'application/json'
 
-        }
+                }
 
-        });
+            });
 
-        const result = await response.json();
+            const result = await response.json();
 
-        if (result.status === "success") {
+            if (result.status === "success") {
 
-            alert(`${result.message}`);
+                alert(`${result.message}`);
+
+            } else {
+
+                alert(result.error)
 
             }
 

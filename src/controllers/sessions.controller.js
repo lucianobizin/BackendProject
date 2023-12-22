@@ -7,7 +7,6 @@ import DMailTemplates from "../constants/DMailTemplates.js";
 import { createHash, isValidPassword } from "../utils.js";
 import MailerService from "../services/mailerService.js";
 import { __dirname } from "../utils.js";
-import fs from "fs";
 
 const getCurrent = async (req, res, next) => {
 

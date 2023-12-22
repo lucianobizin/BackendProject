@@ -5,7 +5,8 @@ export default {
         ENV: process.env.ENV,
         PERSISTENCE: process.env.PERSISTENCE,
         ADMIN_EMAIL: process.env.CORREO_ADMIN,
-        ADMIN_PASSWORD: process.env.PASSWORD_ADMIN
+        ADMIN_PASSWORD: process.env.PASSWORD_ADMIN,
+        ERROR: process.env.ERROR_EMAIL
     },
 
     mongo: {
