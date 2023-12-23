@@ -21,7 +21,7 @@ class CartsRouter extends BaseRouter {
 
         this.put("/products/:pid", ["AUTH"], cartsController.putUpdateProducts);
 
-        this.delete("/:cid/products/:pid", ["NO_AUTH"], cartsController.deleteProductsFromCart);
+        this.delete("/:cid/products/:pid", ["PUBLIC"], cartsController.deleteProductsFromCart);
 
         this.delete("/:cid", ["ADMIN"], cartsController.deleteCart);
 

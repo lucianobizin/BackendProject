@@ -197,7 +197,7 @@ paths:
                     type: string
                     description: Error message
 
-  /password-restoretore:
+  /password-restore:
     get:  
       summary: Page to create a new password once you received an email confimation
       tags:
@@ -222,6 +222,32 @@ paths:
                   message:
                     type: string
                     description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+
+  /upload-documents:
+    get:  
+      summary: Page to premium users to add documents in order to create products
+      tags:
+        - views
+      responses:
+        '200':
+          description: Success response. Renders the page to add documents.
+          content:
+            text/html:
+              schema:
+                type: string
         '500':
           description: Internal server error
           content:

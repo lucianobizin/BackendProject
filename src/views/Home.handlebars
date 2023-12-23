@@ -22,12 +22,14 @@
             <p> Status: {{this.status}}</p>
             <p id="pid"> ID: {{this._id}}</p>
             {{#if this.stockGreaterThanZero}}
-                <form class="buyForm">
-                    <input type="hidden" id="pid" name="pid" value="{{this._id}}"></input>
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" min="1" required></input>
-                    <input type="submit" value="Add to cart">
-                </form>
+            <form class="buyForm">
+                <input type="hidden" id="pid" name="pid" value="{{this._id}}"></input>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" required></input>
+                <input type="submit" value="Add to cart">
+            </form>
+            {{else}}
+            <p class="no-stock-message">Product not available for now</p>
             {{/if}}
             <button class="product-button" data-product-id="{{this._id}}">Details and chat</button>
         </div>

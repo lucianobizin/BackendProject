@@ -1,6 +1,6 @@
 <div class="cart-container">
     <div>
-        <h1>Cart:</h1>
+        <h1>Cart</h1>
     </div>
     <div class="product-cards">
         {{#each cart.products}}
@@ -15,12 +15,13 @@
             <p>Status: {{this.pid.status}}</p>
             <p>ID: {{this.pid._id}}</p>
             <p>Quantity: {{this.quantity}}</p>
+            <button id="deleteProductButton" data-product-id={{this.pid._id}}>Delete</button>
         </div>
         {{/each}}
     </div>
-
-    <button id="purchaseButton">Purchase</button>
-
 </div>
-
+<div class="buttonDiv">
+    <button id="purchaseButton">Purchase</button>
+    <button id="mainProducts">Products</button>
+</div>
 <script src="/js/purchase.js"></script>

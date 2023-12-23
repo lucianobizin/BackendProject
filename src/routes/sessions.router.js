@@ -16,16 +16,12 @@ class SessionRouter extends BaseRouter {
 
         this.put("/password-restore", ["PUBLIC"], sessionsController.restorePassword);
 
-        // Se presenta ante la app
         this.get("/github", ["NO_AUTH"], passportCall("github", {strategyType: "OAUTH"}), sessionsController.postLoginGithub);
 
-        // Trae la info del perfil
         this.get("/githubcallback", ["NO_AUTH"], passportCall("github", {strategyType: "OAUTH"}), sessionsController.postLoginGithubCallback);
 
-        // Se presenta ante la app
         this.get("/google", ["NO_AUTH"], passportCall("google", {scope: ["profile", "email"], strategyType:"OAUTH"}), sessionsController.postLoginGoogle);
 
-        // Trae la info del perfil
         this.get("/googlecallback", ["NO_AUTH"], passportCall("google", {strategyType: "OAUTH"}), sessionsController.postLoginGoogleCallback);
 
         this.get("/profile", ["AUTH"], passportCall("jwt", { strategyType: "JWT" }), sessionsController.getProfile);

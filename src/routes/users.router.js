@@ -11,7 +11,7 @@ class UserRouter extends BaseRouter {
 
         this.get("/premium/:uid", ["AUTH"], usersController.upgradeRole);
 
-        this.get("/mockingproducts", ["AUTH"], usersController.getMockUsers);
+        this.get("/mocking-users", ["AUTH"], usersController.getMockUsers);
 
         this.post("/:uid/documents", ["AUTH", "PREMIUM"], uploader.fields([
             { name: 'profileImage', maxCount: 1, optional: true },

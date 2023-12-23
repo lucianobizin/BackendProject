@@ -46,8 +46,8 @@ if (cluster.isPrimary) {
 
         console.log(`Worker with ${worker.process.pid} died`);
 
-        // Listar los procesos de Node.js ---> tasklist /fi "imagename eq node.exe"
-        // Eliminar un proceso de Node.js por pid --> taskkill /pid 5272 -f
+        // Lists Node.js processes ---> tasklist /fi "imagename eq node.exe"
+        // Eliminate a Node.js process by pid --> taskkill /pid 5272 -f
 
         cluster.fork();
 
@@ -63,8 +63,8 @@ if (cluster.isPrimary) {
     const server = app.listen(PORT, console.log(`Listening on PORT: ${PORT}`));
 
     app.use(cors({
-        //origin:["localhost:8080"], // Origen de las peticioness
-        //credentials:true // Habilita o no dar cookies 
+        //origin:["localhost:8080"], // request origins
+        //credentials:true // Enable the release of cookies 
     }));
 
     const connection = mongoose.connect(config.mongo.URL);

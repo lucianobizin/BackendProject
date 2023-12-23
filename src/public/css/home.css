@@ -146,6 +146,17 @@ html {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+.no-stock {
+    border: 2px solid red;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.no-stock-message {
+    color: red;
+    font-style: italic;
+}
+
 .icon-cart {
     font-size: 24px;
     color: #0077b6;

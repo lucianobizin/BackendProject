@@ -315,12 +315,6 @@ const deleteProductsFromCart = async (req, res, next) => {
 
             cart.products.splice(productIndex, 1);
 
-            // if(cart?.expiryDate) {
-
-            //     cartsService.deleteExpiryDate(cid)
-
-            // };
-
             await cartsService.updateCart(cid, cart.products)
 
             return res.sendSuccess(`Product with ID ${pid} has been removed from the cart with ID ${cid}`);

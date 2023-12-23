@@ -23,7 +23,7 @@ h1 {
 .product-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Adjust for space between cards */
+    justify-content: center; /* Adjust for space between cards */
 }
 
 .product-card {
@@ -45,10 +45,35 @@ h1 {
 
 img {
     max-width: 100%;
-    height: auto;
+    height: 40%;
     display: block;
     margin: 0 auto;
     border-radius: 8px;
+    object-fit: fill;
+}
+
+.buttonDiv {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px; /* Ajusta el margen superior según tus preferencias */
+}
+
+.purchase-button,
+.products-button {
+    margin: 0 10px; /* Ajusta el margen horizontal entre los botones */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.purchase-button:hover,
+.products-button:hover {
+    background-color: #45a049;
 }
 
 p {

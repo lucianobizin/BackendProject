@@ -51,6 +51,51 @@ paths:
                   message:
                     type: string
                     description: Error message
+
+  /api/products/mocking-users:
+    get:
+      summary: Retrieve mocking product for testing.
+      tags:
+        - products
+      responses:
+        "200":
+          description: success response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: request state "success"
+                  payload:
+                    $ref: "#components/schemas/product"
+        '400':
+          description: Incorrect param "room".
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error! Revise db connection and if error persists communicate with MongoDB.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Request state "error"
+                  message:
+                    type: string
+                    description: Error message
 components:
   schemas:
     user:
@@ -86,3 +131,12 @@ components:
         cart:
           type: string
           description: user's cart
+        last_connection:
+          type: string
+          description: user's last connection date
+          format: date-time
+        documents:
+          type: array
+          items:
+            type: string
+          description: Array of URLs (documents).

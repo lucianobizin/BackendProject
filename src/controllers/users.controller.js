@@ -4,6 +4,7 @@ import { usersService } from "../services/index.js";
 import { errorsHandler } from "./error.controller.js";
 import UsersDto from "../dto/UsersDto.js";
 import CloudStorageService from "../services/cloudStorageService.js";
+import { generateUsers } from "../mocks/mockProducts.js"
 
 const getAllUsers = async (req, res, next) => {
 

@@ -2,19 +2,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const purchaseButton = document.getElementById("purchaseButton");
 
-    // if (authCookie) {
+    const deleteButtons = document.querySelectorAll("#deleteProductButton");
+
+    const mainProductsButton = document.getElementById("mainProducts");
+
+    const cartId = getCookie("cart");
+
+    deleteButtons.forEach((button) => {
+
+        button.addEventListener("click", async function () {
+
+            const productId = button.getAttribute("data-product-id");
+
+            if (productId) {
+
+                const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
+                    method: "DELETE",
+                    headers: {
+
+                        "Content-Type": 'application/json'
+    
+                    }
+                });
+
+                const result = await response.json();
+
+                if(result.status === "success"){
+                    alert(result.message);
+                    window.location.reload();
+                } else {
+                    alert("An error occurred while deleting a product, please try again later.");
+                }
+
+            };
+
+        });
+
+    });
+
+    mainProductsButton.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        try {
+
+                window.location.replace('/products');
+
+        } catch (error) {
+
+            alert('Something went wrong! Go manually to /products');
+
+        }
+    })
 
     purchaseButton.addEventListener('click', async (e) => {
 
         e.preventDefault();
 
         try {
-
-            const authCookie = getCookie("authCookie");
-            console.log(authCookie)
-        
-            const cartId = getCookie("cart");
-            console.log(cartId)
 
             if (cartId) {
 
@@ -54,14 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     })
-
-    // } else {
-
-    // Si la cookie "authcookie" no existe, desactivar el botón de compra
-    //     purchaseButton.disabled = true;
-    //     alert("You need to be registered and logged in to buy a product")
-
-    // }
 
 })
 

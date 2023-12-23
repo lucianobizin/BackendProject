@@ -286,7 +286,7 @@ paths:
                     type: string
                     description: Error message
     put:
-      summary: Add a product to a cart no related to a user. This allows users to add products to a cart specifically assigned to them. These carts are created with an expiration time that is erased once the user registers himself/herself or logs in by Google or Github. 
+      summary: Add a product to a cart no related to a user. This allows users to add products to a cart specifically assigned to them. These carts are created with an expiration time, 48hs, that is erased once the user registers himself/herself or logs in by Google or Github. 
       tags:
         - carts
       parameters:
